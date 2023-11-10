@@ -6,18 +6,18 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
 
-    private Rigidbody2D _rb;
-    private Vector2 _moveDirection;
+    private CharacterController _characterController;
+    private Vector3 _moveDirection;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
 
     void Start()
     {
         
-        _rb = GetComponent<Rigidbody2D>();
+        _characterController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-
+        
     }
 
     void Update()
@@ -25,13 +25,13 @@ public class PlayerMovement : MonoBehaviour
         
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        
-        _moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
-        
-        if (_moveDirection != Vector2.zero)
+
+        _moveDirection = new Vector3(horizontalInput, verticalInput, 0f).normalized;
+
+        if (_moveDirection != Vector3.zero)
         {
             _animator.SetBool("isWalking", true);
-            
+
             if (horizontalInput < 0)
             {
                 _spriteRenderer.flipX = true;
@@ -51,7 +51,8 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         
-        _rb.velocity = _moveDirection * moveSpeed;
+        // _characterController.Move(_moveDirection * moveSpeed * Time.deltaTime);
+        _characterController.Move(_moveDirection * (moveSpeed * Time.deltaTime));
         
     }
 }
