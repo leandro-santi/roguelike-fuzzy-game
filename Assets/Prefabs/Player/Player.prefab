@@ -154,6 +154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackForce: 10
   attackCooldown: 1
-  dashDistance: 10
-  dashDuration: 0.5
-  dashCooldown: 3
+  dashDistance: 5
+  dashDuration: 2
+  isDashing: 0

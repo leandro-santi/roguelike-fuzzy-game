@@ -5,23 +5,28 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Attack")]
-    public float attackForce = 10f;
-    public float attackCooldown = 1f;
+    public float attackForce;
+    public float attackCooldown;
     
     private float _nextAttackTime;
     
     [Header("Dash")]
-    public float dashDistance = 10f;
-    public float dashDuration = 0.5f;
-    public float dashCooldown = 3f;
+    public float dashDistance;
+    public float dashDuration;
+    public bool isDashing;
     
     private float _nextDashTime;
+    private CharacterController _controller;
+    private PlayerMovement _playerMovement;
+    private Vector3 _moveDirection;
     
     void Start()
     {
-       
-        
-        
+
+        _controller = GetComponent<CharacterController>();
+        _playerMovement = GetComponent<PlayerMovement>();
+        _nextDashTime = dashDuration;
+
     }
     
     void Update()
@@ -33,10 +38,20 @@ public class PlayerController : MonoBehaviour
             _nextAttackTime = Time.time + attackCooldown;
         }
         
-        if (Input.GetMouseButtonDown(1) && Time.time > _nextDashTime)
+        if (Input.GetMouseButtonDown(1) && !isDashing)
         {
             Dash();
-            _nextDashTime = Time.time + dashCooldown;
+        }
+        
+        if (isDashing)
+        {
+            dashDuration -= Time.deltaTime;
+
+            if (dashDuration <= 0f)
+            {
+                isDashing = false;
+                dashDuration = _nextDashTime;
+            }
         }
         
     }
@@ -53,6 +68,13 @@ public class PlayerController : MonoBehaviour
         
         Debug.Log("Esquivando");
         
+        isDashing = true;
+        
+        _moveDirection = _playerMovement.ReturnPlayerDirection();
+        
+        Vector3 dashPosition = transform.position + _moveDirection * dashDistance;
+        _controller.Move(dashPosition - transform.position);
+
     }
 
 }

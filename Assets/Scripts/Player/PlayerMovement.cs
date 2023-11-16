@@ -51,8 +51,15 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         
-        // _characterController.Move(_moveDirection * moveSpeed * Time.deltaTime);
         _characterController.Move(_moveDirection * (moveSpeed * Time.deltaTime));
         
     }
+
+    public Vector3 ReturnPlayerDirection()
+    {
+
+        return this._moveDirection;
+
+    }
+
 }
