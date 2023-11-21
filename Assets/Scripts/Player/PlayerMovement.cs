@@ -13,16 +13,13 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        
     }
 
     void Update()
     {
-        
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
@@ -41,25 +38,20 @@ public class PlayerMovement : MonoBehaviour
                 _spriteRenderer.flipX = false;
             }
         }
+
         else
         {
             _animator.SetBool("isWalking", false);
         }
-        
     }
 
     void FixedUpdate()
     {
-        
         _characterController.Move(_moveDirection * (moveSpeed * Time.deltaTime));
-        
     }
 
     public Vector3 ReturnPlayerDirection()
     {
-
         return this._moveDirection;
-
     }
-
 }
