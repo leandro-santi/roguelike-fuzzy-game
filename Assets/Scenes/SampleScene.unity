@@ -6549,7 +6549,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4545034324274261608, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
       propertyPath: chaseRange
-      value: 4
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545034324274261608, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
+      propertyPath: chaseSpeed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4545034324274261609, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
       propertyPath: m_RootOrder

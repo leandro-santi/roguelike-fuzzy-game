@@ -14,20 +14,21 @@ public class CaveirinhaController : MonoBehaviour
 
     private EnemyState _currentState;
 
-    [Header("Walk")] public float walkSpeed = 2f;
+    [Header("Walk")] public float walkSpeed;
 
-    [Header("Chase")] public float chaseSpeed = 5f;
+    [Header("Chase")] public float chaseSpeed;
     public float chaseRange;
 
-    [Header("Attack")] public float attackRange = 2f;
-    public float attackCooldown = 2f;
+    [Header("Attack")] public float attackRange;
+    public float attackCooldown;
 
     private Transform _player;
+    private Vector2 _randomDirection;
 
     // private float _nextAttackTime = 0f;
-    private Vector2 _randomDirection;
     private float _idleTimer = 0f;
     private float _walkTimer = 0f;
+
     private bool _isWalking;
 
     void Start()
@@ -62,7 +63,7 @@ public class CaveirinhaController : MonoBehaviour
 
         _idleTimer += Time.deltaTime;
 
-        if (_idleTimer >= 2.5f)
+        if (_idleTimer >= 1f)
         {
             int randomMove = Random.Range(0, 3);
 
@@ -81,25 +82,34 @@ public class CaveirinhaController : MonoBehaviour
         Debug.Log("Walk");
 
         transform.Translate(_randomDirection * (walkSpeed * Time.deltaTime));
-        
-        // if (Vector2.Distance(transform.position, _player.position) < attackRange)
-        // {
-        //     _currentState = EnemyState.Chase;
-        // }
+
+        if (Vector2.Distance(transform.position, _player.position) < chaseRange)
+        {
+            _currentState = EnemyState.Chase;
+        }
 
         _walkTimer += Time.deltaTime;
 
         if (_walkTimer >= 2f)
         {
             _currentState = EnemyState.Idle;
-            _isWalking = false;
             _walkTimer = 0f;
         }
     }
 
     void Chase()
     {
-        // Debug.Log("Chase");
+        Debug.Log("Chase");
+
+        Vector2 direction = (_player.position - transform.position).normalized;
+        // transform.right = direction;
+
+        transform.Translate(direction * (Time.deltaTime * chaseSpeed));
+
+        if (Vector2.Distance(transform.position, _player.position) > chaseRange)
+        {
+            _currentState = EnemyState.Walk;
+        }
     }
 
     void Attack()
@@ -132,11 +142,5 @@ public class CaveirinhaController : MonoBehaviour
     private Vector2 ReturnRandomDirection()
     {
         return Random.insideUnitCircle.normalized;
-    }
-
-    private IEnumerator WalkingDelay()
-    {
-        yield return 3f;
-        _isWalking = false;
     }
 }
