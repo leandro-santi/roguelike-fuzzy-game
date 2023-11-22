@@ -24,6 +24,7 @@ public class CaveirinhaController : MonoBehaviour
 
     private Transform _player;
     private Vector2 _randomDirection;
+    private SpriteRenderer _sprite;
 
     // private float _nextAttackTime = 0f;
     private float _idleTimer = 0f;
@@ -36,6 +37,7 @@ public class CaveirinhaController : MonoBehaviour
         _currentState = EnemyState.Idle;
         _player = GameObject.FindGameObjectWithTag("Player")
             .transform;
+        _sprite = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -79,7 +81,7 @@ public class CaveirinhaController : MonoBehaviour
 
     void Walk()
     {
-        Debug.Log("Walk");
+        // Debug.Log("Walk");
 
         transform.Translate(_randomDirection * (walkSpeed * Time.deltaTime));
 
@@ -99,12 +101,30 @@ public class CaveirinhaController : MonoBehaviour
 
     void Chase()
     {
-        Debug.Log("Chase");
+        // Debug.Log("Chase");
 
         Vector2 direction = (_player.position - transform.position).normalized;
-        // transform.right = direction;
 
         transform.Translate(direction * (Time.deltaTime * chaseSpeed));
+
+        if (_player.position.x > transform.position.x)
+        {
+            var localScale = transform.localScale;
+            localScale = new Vector3(Mathf.Abs(localScale.x), localScale.y,
+                localScale.z);
+            transform.localScale = localScale;
+
+            // _sprite.flipX = false;
+        }
+        else
+        {
+            var localScale = transform.localScale;
+            localScale = new Vector3(-Mathf.Abs(localScale.x), localScale.y,
+                localScale.z);
+            transform.localScale = localScale;
+
+            // _sprite.flipX = true;
+        }
 
         if (Vector2.Distance(transform.position, _player.position) > chaseRange)
         {
