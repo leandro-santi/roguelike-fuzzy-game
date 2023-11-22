@@ -23,13 +23,16 @@ public class CaveirinhaController : MonoBehaviour
     public float attackCooldown = 2f;
 
     private Transform _player;
-    private float _nextAttackTime = 0f;
+
+    // private float _nextAttackTime = 0f;
     private Vector2 _randomDirection;
+    private float _idleTimer = 0f;
     private float _walkTimer = 0f;
+    private bool _isWalking;
 
     void Start()
     {
-        _currentState = EnemyState.Walk;
+        _currentState = EnemyState.Idle;
         _player = GameObject.FindGameObjectWithTag("Player")
             .transform;
     }
@@ -55,63 +58,48 @@ public class CaveirinhaController : MonoBehaviour
 
     void Idle()
     {
-        // int randomMove = Random.Range(0, 2);
-        //
-        // if (randomMove == 0)
-        // {
-        //     Walk();
-        // }
-        //
-        // else
-        // {
-        //     Idle();
-        // }
+        // Debug.Log("Idle");
 
-        // Walk();
-        // _currentState = EnemyState.Walk;
+        _idleTimer += Time.deltaTime;
+
+        if (_idleTimer >= 2.5f)
+        {
+            int randomMove = Random.Range(0, 3);
+
+            if (randomMove >= 1)
+            {
+                _randomDirection = ReturnRandomDirection();
+                _currentState = EnemyState.Walk;
+            }
+
+            _idleTimer = 0f;
+        }
     }
 
     void Walk()
     {
-        // Debug.Log("Walk");
+        Debug.Log("Walk");
 
-        _walkTimer += Time.deltaTime;
+        transform.Translate(_randomDirection * (walkSpeed * Time.deltaTime));
         
-        while (_walkTimer >= 3f)
-        {
-            // transform.Translate(Vector2.right * (walkSpeed * Time.deltaTime * 1000));
-            // _randomDirection = Random.insideUnitCircle.normalized;
-            // transform.Translate(_randomDirection * (walkSpeed * Time.deltaTime));
-            // _walkTimer = 0f;
-            _currentState = EnemyState.Idle;
-            _walkTimer = 0;
-        }
-
-        transform.Translate(Vector2.right * (walkSpeed * Time.deltaTime));
-
-        // if (Vector2.Distance(transform.position, _player.position) < chaseRange)
+        // if (Vector2.Distance(transform.position, _player.position) < attackRange)
         // {
         //     _currentState = EnemyState.Chase;
         // }
+
+        _walkTimer += Time.deltaTime;
+
+        if (_walkTimer >= 2f)
+        {
+            _currentState = EnemyState.Idle;
+            _isWalking = false;
+            _walkTimer = 0f;
+        }
     }
 
     void Chase()
     {
         // Debug.Log("Chase");
-
-        // transform.right = _player.position - transform.position;
-        //
-        // transform.Translate(Vector2.right * (chaseSpeed * Time.deltaTime));
-        //
-        // if (Vector2.Distance(transform.position, _player.position) < attackRange)
-        // {
-        //     _currentState = EnemyState.Attack;
-        // }
-        //
-        // else if (Vector2.Distance(transform.position, _player.position) > attackRange * 2)
-        // {
-        //     _currentState = EnemyState.Walk;
-        // }
     }
 
     void Attack()
@@ -129,18 +117,26 @@ public class CaveirinhaController : MonoBehaviour
         // {
         //     RangedAttack();
         // }
-        //
-        // _currentState = EnemyState.Idle;
-        // _nextAttackTime = Time.time + attackCooldown;
     }
 
     void MeleeAttack()
     {
-        Debug.Log("Ataque corpo a corpo!");
+        Debug.Log("Melee Attack!");
     }
 
     void RangedAttack()
     {
-        Debug.Log("Ataque à distância!");
+        Debug.Log("Ranged Attack!");
+    }
+
+    private Vector2 ReturnRandomDirection()
+    {
+        return Random.insideUnitCircle.normalized;
+    }
+
+    private IEnumerator WalkingDelay()
+    {
+        yield return 3f;
+        _isWalking = false;
     }
 }

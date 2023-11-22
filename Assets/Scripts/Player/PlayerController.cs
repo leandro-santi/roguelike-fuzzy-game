@@ -51,13 +51,10 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        // Debug.Log("Atacando");
     }
 
     private void Dash()
     {
-        // Debug.Log("Esquivando");
-
         isDashing = true;
 
         _moveDirection = _playerMovement.ReturnPlayerDirection();
