@@ -22,13 +22,18 @@ public class CaveirinhaController : MonoBehaviour
     [Header("Attack")] public float attackRange;
     public float attackCooldown;
 
+    [Header("RangedAttack")] public Transform projectilePrefab;
+    public float projectileSpeed = 5f;
+    public float timeBetweenAttacks = 2f;
+
     private Transform _player;
     private Vector2 _randomDirection;
     private SpriteRenderer _sprite;
 
     // private float _nextAttackTime = 0f;
-    private float _idleTimer = 0f;
-    private float _walkTimer = 0f;
+    private float _idleTimer;
+    private float _walkTimer;
+    private float _timeSinceLastAttack;
 
     private bool _isWalking;
 
@@ -38,6 +43,10 @@ public class CaveirinhaController : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player")
             .transform;
         _sprite = GetComponent<SpriteRenderer>();
+
+        _idleTimer = 0f;
+        _walkTimer = 0f;
+        _timeSinceLastAttack = 0f;
     }
 
     void Update()
@@ -126,7 +135,12 @@ public class CaveirinhaController : MonoBehaviour
             // _sprite.flipX = true;
         }
 
-        if (Vector2.Distance(transform.position, _player.position) > chaseRange)
+        if (Vector2.Distance(transform.position, _player.position) <= attackRange)
+        {
+            _currentState = EnemyState.Attack;
+        }
+
+        else if (Vector2.Distance(transform.position, _player.position) >= chaseRange)
         {
             _currentState = EnemyState.Walk;
         }
@@ -136,17 +150,29 @@ public class CaveirinhaController : MonoBehaviour
     {
         // Debug.Log("Attack");
 
-        // int randomAttack = Random.Range(0, 2);
-        //
-        // if (randomAttack == 0)
-        // {
-        //     MeleeAttack();
-        // }
-        //
-        // else
-        // {
-        //     RangedAttack();
-        // }
+        _timeSinceLastAttack += Time.deltaTime;
+
+        if (_timeSinceLastAttack >= timeBetweenAttacks)
+        {
+            int randomAttack = Random.Range(0, 2);
+
+            if (randomAttack == 0)
+            {
+                MeleeAttack();
+            }
+
+            else
+            {
+                RangedAttack();
+            }
+
+            _timeSinceLastAttack = 0f;
+        }
+
+        if (Vector2.Distance(transform.position, _player.position) >= attackRange)
+        {
+            _currentState = EnemyState.Chase;
+        }
     }
 
     void MeleeAttack()
@@ -157,6 +183,19 @@ public class CaveirinhaController : MonoBehaviour
     void RangedAttack()
     {
         Debug.Log("Ranged Attack!");
+
+        LaunchProjectile();
+    }
+
+    void LaunchProjectile()
+    {
+        Transform projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+
+        Vector2 direction = (_player.position - transform.position).normalized;
+
+        projectile.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
+
+        Destroy(projectile.gameObject, 2f);
     }
 
     private Vector2 ReturnRandomDirection()
