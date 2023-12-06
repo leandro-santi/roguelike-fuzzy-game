@@ -4665,7 +4665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4545034324274261612, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
@@ -4676,9 +4676,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7665927443722414074, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
-      propertyPath: m_Enabled
-      value: 1
+    - target: {fileID: 4736885462007085911, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
+      propertyPath: m_Size.x
+      value: 0.7515512
+      objectReference: {fileID: 0}
+    - target: {fileID: 4736885462007085911, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
+      propertyPath: m_Size.y
+      value: 1.0013903
+      objectReference: {fileID: 0}
+    - target: {fileID: 4736885462007085911, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.092974395
+      objectReference: {fileID: 0}
+    - target: {fileID: 4736885462007085911, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.50069517
       objectReference: {fileID: 0}
     - target: {fileID: 7764536866863894664, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
       propertyPath: m_RootOrder
@@ -4728,9 +4740,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 7764536866863894669, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
-      propertyPath: m_TagString
-      value: Player
+    - target: {fileID: 8509245240429655678, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}

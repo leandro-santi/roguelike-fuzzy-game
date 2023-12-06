@@ -6,14 +6,14 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
 
-    private CharacterController _characterController;
+    private Rigidbody2D _rigidbody;
     private Vector3 _moveDirection;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
 
     void Start()
     {
-        _characterController = GetComponent<CharacterController>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        _characterController.Move(_moveDirection * (moveSpeed * Time.deltaTime));
+        _rigidbody.velocity = new Vector2(_moveDirection.x * moveSpeed, _moveDirection.y * moveSpeed);
     }
 
     public Vector3 ReturnPlayerDirection()

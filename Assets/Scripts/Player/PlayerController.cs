@@ -13,13 +13,13 @@ public class PlayerController : MonoBehaviour
 
     private float _nextAttackTime;
     private float _nextDashTime;
-    private CharacterController _controller;
+    private Rigidbody2D _rigidbody;
     private PlayerMovement _playerMovement;
     private Vector3 _moveDirection;
 
     void Start()
     {
-        _controller = GetComponent<CharacterController>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         _playerMovement = GetComponent<PlayerMovement>();
         _nextDashTime = dashDuration;
     }
@@ -60,6 +60,6 @@ public class PlayerController : MonoBehaviour
         _moveDirection = _playerMovement.ReturnPlayerDirection();
 
         Vector3 dashPosition = transform.position + _moveDirection * dashDistance;
-        _controller.Move(dashPosition - transform.position);
+        _rigidbody.MovePosition(dashPosition);
     }
 }
