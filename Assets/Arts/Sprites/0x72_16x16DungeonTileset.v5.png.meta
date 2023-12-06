@@ -3183,7 +3183,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 0x72_16x16DungeonTileset.v5_146
+      name: box_1
       rect:
         serializedVersion: 2
         x: 80
@@ -3204,7 +3204,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 0x72_16x16DungeonTileset.v5_147
+      name: box_3
       rect:
         serializedVersion: 2
         x: 96
@@ -3729,7 +3729,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 0x72_16x16DungeonTileset.v5_172
+      name: box_2
       rect:
         serializedVersion: 2
         x: 80
@@ -3750,7 +3750,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 0x72_16x16DungeonTileset.v5_173
+      name: box_4
       rect:
         serializedVersion: 2
         x: 96
@@ -6596,8 +6596,6 @@ TextureImporter:
       0x72_16x16DungeonTileset.v5_139: -272301774
       0x72_16x16DungeonTileset.v5_14: 341798789
       0x72_16x16DungeonTileset.v5_140: -1040265250
-      0x72_16x16DungeonTileset.v5_146: 1752504057
-      0x72_16x16DungeonTileset.v5_147: -888568928
       0x72_16x16DungeonTileset.v5_148: -107037486
       0x72_16x16DungeonTileset.v5_149: 1509026790
       0x72_16x16DungeonTileset.v5_15: 212018303
@@ -6620,8 +6618,6 @@ TextureImporter:
       0x72_16x16DungeonTileset.v5_166: -836688086
       0x72_16x16DungeonTileset.v5_17: 464707734
       0x72_16x16DungeonTileset.v5_171: 860200970
-      0x72_16x16DungeonTileset.v5_172: -1823946892
-      0x72_16x16DungeonTileset.v5_173: -1302023128
       0x72_16x16DungeonTileset.v5_174: -978163670
       0x72_16x16DungeonTileset.v5_175: 1282905378
       0x72_16x16DungeonTileset.v5_176: -259022027
@@ -6811,6 +6807,10 @@ TextureImporter:
       0x72_16x16DungeonTileset.v5_99: -72272299
       blue_fountain_1: -1736068244
       blue_fountain_2: -1546002924
+      box_1: 1752504057
+      box_2: -1823946892
+      box_3: -888568928
+      box_4: -1302023128
       corner_1: -1928462709
       corner_2: -735105823
       corner_3: -1306176491
