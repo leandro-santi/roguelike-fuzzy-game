@@ -117,15 +117,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.6_0
+      name: collision_1
       rect:
         serializedVersion: 2
         x: 16
-        y: 378
-        width: 96
-        height: 129
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        y: 432
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -6322,7 +6322,6 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      0x72_DungeonTilesetII_v1.6_0: 1720019757
       0x72_DungeonTilesetII_v1.6_1: 200957666
       0x72_DungeonTilesetII_v1.6_10: 1237064320
       0x72_DungeonTilesetII_v1.6_100: 1967230604
@@ -6617,6 +6616,7 @@ TextureImporter:
       0x72_DungeonTilesetII_v1.6_99: 1329700948
       caveirinha_head: 1797923940
       collision: 194938037
+      collision_1: 1720019757
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
