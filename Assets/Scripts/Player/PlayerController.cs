@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
+        Debug.Log("Attacking");
     }
 
     private void Dash()

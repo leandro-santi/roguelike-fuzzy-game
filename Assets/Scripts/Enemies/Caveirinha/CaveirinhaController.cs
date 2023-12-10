@@ -79,6 +79,7 @@ public class CaveirinhaController : MonoBehaviour
             if (randomMove >= 1)
             {
                 _randomDirection = ReturnRandomDirection();
+                FlipCharacter(_randomDirection * new Vector2(10f, 10f));
                 _currentState = EnemyState.Walk;
             }
 
@@ -114,24 +115,7 @@ public class CaveirinhaController : MonoBehaviour
 
         transform.Translate(direction * (Time.deltaTime * chaseSpeed));
 
-        if (_player.position.x > transform.position.x)
-        {
-            var localScale = transform.localScale;
-            localScale = new Vector3(Mathf.Abs(localScale.x), localScale.y,
-                localScale.z);
-            transform.localScale = localScale;
-
-            // _sprite.flipX = false;
-        }
-        else
-        {
-            var localScale = transform.localScale;
-            localScale = new Vector3(-Mathf.Abs(localScale.x), localScale.y,
-                localScale.z);
-            transform.localScale = localScale;
-
-            // _sprite.flipX = true;
-        }
+        FlipCharacter(_player.position);
 
         if (Vector2.Distance(transform.position, _player.position) <= attackRange)
         {
@@ -199,5 +183,27 @@ public class CaveirinhaController : MonoBehaviour
     private Vector2 ReturnRandomDirection()
     {
         return Random.insideUnitCircle.normalized;
+    }
+
+    private void FlipCharacter(Vector3 targetPosition)
+    {
+        if (targetPosition.x > transform.position.x)
+        {
+            var localScale = transform.localScale;
+            localScale = new Vector3(Mathf.Abs(localScale.x), localScale.y,
+                localScale.z);
+            transform.localScale = localScale;
+
+            // _sprite.flipX = false;
+        }
+        else
+        {
+            var localScale = transform.localScale;
+            localScale = new Vector3(-Mathf.Abs(localScale.x), localScale.y,
+                localScale.z);
+            transform.localScale = localScale;
+
+            // _sprite.flipX = true;
+        }
     }
 }

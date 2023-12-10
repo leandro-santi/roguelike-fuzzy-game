@@ -28257,41 +28257,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4545034324274261608, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
-      propertyPath: chaseRange
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4545034324274261608, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
-      propertyPath: chaseSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4545034324274261608, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
-      propertyPath: attackRange
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4545034324274261608, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
-      propertyPath: projectileSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4545034324274261608, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
-      propertyPath: projectilePrefab
-      value: 
-      objectReference: {fileID: 5601560752871799364, guid: 3f492feb413538c9fb8a4baa286768d0, type: 3}
-    - target: {fileID: 4545034324274261608, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
-      propertyPath: timeBetweenAttacks
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4545034324274261609, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4545034324274261609, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4545034324274261609, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 17.55
       objectReference: {fileID: 0}
     - target: {fileID: 4545034324274261609, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
       propertyPath: m_LocalPosition.z
@@ -28325,17 +28301,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4545034324274261610, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
-      propertyPath: m_FlipX
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4545034324274261612, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
       propertyPath: m_Name
       value: Caveirinha
       objectReference: {fileID: 0}
-    - target: {fileID: 4545034324274261612, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 4545034324274261623, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
+      propertyPath: m_Simulated
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}

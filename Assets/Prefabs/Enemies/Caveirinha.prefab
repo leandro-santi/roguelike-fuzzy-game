@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4545034324274261610}
   - component: {fileID: 4545034324274261611}
   - component: {fileID: 4545034324274261623}
+  - component: {fileID: 1415672461381230215}
   - component: {fileID: 4545034324274261608}
   m_Layer: 0
   m_Name: Caveirinha
@@ -124,11 +125,37 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 4b0a664a9232d034290b33219264dfa8, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!61 &1415672461381230215
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4545034324274261612}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.4375}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.625, y: 0.875}
+    newSize: {x: 0.625, y: 0.875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.625, y: 0.875}
+  m_EdgeRadius: 0
 --- !u!114 &4545034324274261608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +169,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 2
-  chaseSpeed: 5
-  attackRange: 2
+  chaseSpeed: 2
+  chaseRange: 7
+  attackRange: 3
   attackCooldown: 2
+  projectilePrefab: {fileID: 5601560752871799364, guid: 3f492feb413538c9fb8a4baa286768d0, type: 3}
+  projectileSpeed: 10
+  timeBetweenAttacks: 1
