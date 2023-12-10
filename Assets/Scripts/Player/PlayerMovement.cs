@@ -4,16 +4,14 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
 
-    private Rigidbody2D _rigidbody;
+    private Rigidbody2D _rb;
     private Vector3 _moveDirection;
     private Animator _animator;
-    private SpriteRenderer _spriteRenderer;
 
     void Start()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -38,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        _rigidbody.velocity = new Vector2(_moveDirection.x * moveSpeed, _moveDirection.y * moveSpeed);
+        _rb.velocity = new Vector2(_moveDirection.x * moveSpeed, _moveDirection.y * moveSpeed);
     }
 
     public Vector3 ReturnPlayerDirection()
@@ -46,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         return this._moveDirection;
     }
 
-    public void FlipCharacter(float horizontalInput)
+    private void FlipCharacter(float horizontalInput)
     {
         if (horizontalInput < 0)
         {
@@ -54,8 +52,6 @@ public class PlayerMovement : MonoBehaviour
             localScale = new Vector3(-Mathf.Abs(localScale.x), localScale.y,
                 localScale.z);
             transform.localScale = localScale;
-
-            // _spriteRenderer.flipX = true;
         }
         else if (horizontalInput > 0)
         {
@@ -63,8 +59,6 @@ public class PlayerMovement : MonoBehaviour
             localScale = new Vector3(Mathf.Abs(localScale.x), localScale.y,
                 localScale.z);
             transform.localScale = localScale;
-
-            // _spriteRenderer.flipX = false;
         }
     }
 }

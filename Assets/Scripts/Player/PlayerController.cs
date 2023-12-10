@@ -4,6 +4,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Attack")] public float attackForce;
     public float attackCooldown;
+    public bool isAttacking;
 
     [Header("Dash")] public float dashDistance;
     public float dashDuration;
@@ -11,13 +12,13 @@ public class PlayerController : MonoBehaviour
 
     private float _nextAttackTime;
     private float _nextDashTime;
-    private Rigidbody2D _rigidbody;
+    private Rigidbody2D _rb;
     private PlayerMovement _playerMovement;
     private Vector3 _moveDirection;
 
     void Start()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
         _playerMovement = GetComponent<PlayerMovement>();
         _nextDashTime = dashDuration;
     }
@@ -59,6 +60,6 @@ public class PlayerController : MonoBehaviour
         _moveDirection = _playerMovement.ReturnPlayerDirection();
 
         Vector3 dashPosition = transform.position + _moveDirection * dashDistance;
-        _rigidbody.MovePosition(dashPosition);
+        _rb.MovePosition(dashPosition);
     }
 }

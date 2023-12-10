@@ -25,8 +25,8 @@ public class CaveirinhaController : MonoBehaviour
     public float timeBetweenAttacks = 2f;
 
     private Transform _player;
+
     private Vector2 _randomDirection;
-    private SpriteRenderer _sprite;
 
     // private float _nextAttackTime = 0f;
     private float _idleTimer;
@@ -40,7 +40,6 @@ public class CaveirinhaController : MonoBehaviour
         _currentState = EnemyState.Idle;
         _player = GameObject.FindGameObjectWithTag("Player")
             .transform;
-        _sprite = GetComponent<SpriteRenderer>();
 
         _idleTimer = 0f;
         _walkTimer = 0f;
@@ -193,8 +192,6 @@ public class CaveirinhaController : MonoBehaviour
             localScale = new Vector3(Mathf.Abs(localScale.x), localScale.y,
                 localScale.z);
             transform.localScale = localScale;
-
-            // _sprite.flipX = false;
         }
         else
         {
@@ -202,8 +199,6 @@ public class CaveirinhaController : MonoBehaviour
             localScale = new Vector3(-Mathf.Abs(localScale.x), localScale.y,
                 localScale.z);
             transform.localScale = localScale;
-
-            // _sprite.flipX = true;
         }
     }
 }

@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 4545034324274261623}
   - component: {fileID: 1415672461381230215}
   - component: {fileID: 4545034324274261608}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Caveirinha
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
