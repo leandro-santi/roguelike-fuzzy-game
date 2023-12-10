@@ -28305,6 +28305,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Caveirinha
       objectReference: {fileID: 0}
+    - target: {fileID: 4545034324274261612, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545034324274261612, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 4545034324274261623, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
       propertyPath: m_Simulated
       value: 1
@@ -28318,22 +28326,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4736885462007085911, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
-      propertyPath: m_Size.x
-      value: 0.7515512
-      objectReference: {fileID: 0}
-    - target: {fileID: 4736885462007085911, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
-      propertyPath: m_Size.y
-      value: 1.0013903
-      objectReference: {fileID: 0}
-    - target: {fileID: 4736885462007085911, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.092974395
-      objectReference: {fileID: 0}
-    - target: {fileID: 4736885462007085911, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.50069517
-      objectReference: {fileID: 0}
     - target: {fileID: 7764536866863894664, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -28381,26 +28373,6 @@ PrefabInstance:
     - target: {fileID: 7764536866863894669, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7764536866863894679, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
-      propertyPath: dashSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7764536866863894679, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
-      propertyPath: dashDuration
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8509245240429655678, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 4b0a664a9232d034290b33219264dfa8, type: 2}
-    - target: {fileID: 8509245240429655678, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8509245240429655678, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
-      propertyPath: m_GravityScale
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}

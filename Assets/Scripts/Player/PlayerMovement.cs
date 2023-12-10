@@ -27,14 +27,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _animator.SetBool("isWalking", true);
 
-            if (horizontalInput < 0)
-            {
-                _spriteRenderer.flipX = true;
-            }
-            else if (horizontalInput > 0)
-            {
-                _spriteRenderer.flipX = false;
-            }
+            FlipCharacter(horizontalInput);
         }
 
         else
@@ -51,5 +44,27 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 ReturnPlayerDirection()
     {
         return this._moveDirection;
+    }
+
+    public void FlipCharacter(float horizontalInput)
+    {
+        if (horizontalInput < 0)
+        {
+            var localScale = transform.localScale;
+            localScale = new Vector3(-Mathf.Abs(localScale.x), localScale.y,
+                localScale.z);
+            transform.localScale = localScale;
+
+            // _spriteRenderer.flipX = true;
+        }
+        else if (horizontalInput > 0)
+        {
+            var localScale = transform.localScale;
+            localScale = new Vector3(Mathf.Abs(localScale.x), localScale.y,
+                localScale.z);
+            transform.localScale = localScale;
+
+            // _spriteRenderer.flipX = false;
+        }
     }
 }

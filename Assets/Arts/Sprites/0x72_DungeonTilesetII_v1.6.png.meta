@@ -125,7 +125,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -369,7 +369,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.6_12
+      name: weapon_0
       rect:
         serializedVersion: 2
         x: 339
@@ -6345,7 +6345,6 @@ TextureImporter:
       0x72_DungeonTilesetII_v1.6_117: 1139850633
       0x72_DungeonTilesetII_v1.6_118: 2027113691
       0x72_DungeonTilesetII_v1.6_119: 1101565371
-      0x72_DungeonTilesetII_v1.6_12: 1885492009
       0x72_DungeonTilesetII_v1.6_120: -438486786
       0x72_DungeonTilesetII_v1.6_121: 150393709
       0x72_DungeonTilesetII_v1.6_122: -192171287
@@ -6617,6 +6616,7 @@ TextureImporter:
       caveirinha_head: 1797923940
       collision: 194938037
       collision_1: 1720019757
+      weapon_0: 1885492009
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
