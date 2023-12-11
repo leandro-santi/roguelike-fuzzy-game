@@ -21,18 +21,16 @@ public class CaveirinhaController : MonoBehaviour
     public float attackCooldown;
 
     [Header("RangedAttack")] public Transform projectilePrefab;
-    public float projectileSpeed = 5f;
-    public float timeBetweenAttacks = 2f;
+    public float projectileSpeed;
+    public float timeBetweenAttacks;
 
     private Transform _player;
-
     private Vector2 _randomDirection;
 
-    // private float _nextAttackTime = 0f;
+    private float _nextAttackTime;
     private float _idleTimer;
     private float _walkTimer;
     private float _timeSinceLastAttack;
-
     private bool _isWalking;
 
     void Start()
@@ -137,7 +135,7 @@ public class CaveirinhaController : MonoBehaviour
         {
             int randomAttack = Random.Range(0, 2);
 
-            if (randomAttack == 0)
+            if (randomAttack == -1)
             {
                 MeleeAttack();
             }
@@ -163,7 +161,7 @@ public class CaveirinhaController : MonoBehaviour
 
     void RangedAttack()
     {
-        Debug.Log("Ranged Attack!");
+        // Debug.Log("Ranged Attack!");
 
         LaunchProjectile();
     }
