@@ -170,9 +170,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 2
   chaseSpeed: 2
-  chaseRange: 7
-  attackRange: 3
-  attackCooldown: 2
+  chaseRange: 8
+  attackRange: 4
+  attackCooldown: 1
   projectilePrefab: {fileID: 5601560752871799364, guid: 3f492feb413538c9fb8a4baa286768d0, type: 3}
   projectileSpeed: 10
   timeBetweenAttacks: 1

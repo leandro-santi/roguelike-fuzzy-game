@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     [Header("Attack")] public float attackForce;
     public float attackCooldown;
     public bool isAttacking;
+    public Transform projectilePrefab;
 
     [Header("Dash")] public float dashDistance;
     public float dashDuration;
@@ -51,6 +52,17 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         Debug.Log("Attacking");
+
+        var enemy = GameObject.FindGameObjectWithTag("Enemy")
+            .transform;
+
+        Transform projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+
+        Vector2 direction = (enemy.position - transform.position).normalized;
+
+        projectile.GetComponent<Rigidbody2D>().velocity = direction * 10f;
+
+        Destroy(projectile.gameObject, 2f);
     }
 
     private void Dash()

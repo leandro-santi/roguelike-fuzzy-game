@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &434577732
 Transform:
   m_ObjectHideFlags: 0
@@ -256,6 +256,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackForce: 10
   attackCooldown: 1
+  isAttacking: 0
+  projectilePrefab: {fileID: 5601560752871799364, guid: 3f492feb413538c9fb8a4baa286768d0, type: 3}
   dashDistance: 3
   dashDuration: 3
   isDashing: 0
