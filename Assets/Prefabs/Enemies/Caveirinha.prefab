@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4545034324274261611}
   - component: {fileID: 4545034324274261623}
   - component: {fileID: 1415672461381230215}
+  - component: {fileID: 4992812209552915620}
   - component: {fileID: 4545034324274261608}
   m_Layer: 7
   m_Name: Caveirinha
@@ -156,6 +157,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.625, y: 0.875}
   m_EdgeRadius: 0
+--- !u!114 &4992812209552915620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4545034324274261612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f30c8ff5e039d844d95da9a80401a8d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
 --- !u!114 &4545034324274261608
 MonoBehaviour:
   m_ObjectHideFlags: 0

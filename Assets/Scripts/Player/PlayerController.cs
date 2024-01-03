@@ -51,8 +51,6 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        Debug.Log("Attacking");
-
         sword.GetComponent<Animator>().Play("PlayerSwordAttack");
         sword.GetComponent<BoxCollider2D>().enabled = true;
 
