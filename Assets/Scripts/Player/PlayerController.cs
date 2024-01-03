@@ -1,11 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Attack")] public float attackForce;
     public float attackCooldown;
-    public bool isAttacking;
-    public Transform projectilePrefab;
+    public GameObject sword;
 
     [Header("Dash")] public float dashDistance;
     public float dashDuration;
@@ -53,16 +53,17 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Attacking");
 
-        var enemy = GameObject.FindGameObjectWithTag("Enemy")
-            .transform;
+        sword.GetComponent<Animator>().Play("PlayerSwordAttack");
+        sword.GetComponent<BoxCollider2D>().enabled = true;
 
-        Transform projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        StartCoroutine(EndSwordAttack());
+    }
 
-        Vector2 direction = (enemy.position - transform.position).normalized;
-
-        projectile.GetComponent<Rigidbody2D>().velocity = direction * 10f;
-
-        Destroy(projectile.gameObject, 2f);
+    private IEnumerator EndSwordAttack()
+    {
+        yield return new WaitForSeconds(attackCooldown);
+        sword.GetComponent<Animator>().Play("New State");
+        sword.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     private void Dash()
