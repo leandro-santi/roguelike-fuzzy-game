@@ -237,7 +237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &609709873
 Transform:
   m_ObjectHideFlags: 0
@@ -25537,6 +25537,7 @@ GameObject:
   - component: {fileID: 1677721532}
   - component: {fileID: 1677721533}
   - component: {fileID: 1677721534}
+  - component: {fileID: 1677721535}
   m_Layer: 0
   m_Name: Square
   m_TagString: Enemy
@@ -25623,7 +25624,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a8135423e18134b9013b527cf028d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 986134383}
+  distanceThreshold: 10
+  calmPeakDistance: 5
+  fearPeakDistance: 15
+  angerPeakDistance: 25
+  couragePeakDistance: 35
+  fuzzyMembershipPeak: 1
+--- !u!114 &1677721535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677721531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eaaefef0aa3e2bce83735e78bec7e8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fuzzyLogicController: {fileID: 0}
+  player: {fileID: 986134383}
 --- !u!1 &2035592269
 GameObject:
   m_ObjectHideFlags: 0
