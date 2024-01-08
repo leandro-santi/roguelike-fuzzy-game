@@ -4,6 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
 
+    private float _initialMoveSpeed;
     private Rigidbody2D _rb;
     private Vector3 _moveDirection;
     private Animator _animator;
@@ -12,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _initialMoveSpeed = moveSpeed;
     }
 
     void Update()
@@ -42,6 +44,16 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 ReturnPlayerDirection()
     {
         return this._moveDirection;
+    }
+
+    public void EnableDashSpeed(float speed)
+    {
+        moveSpeed = speed;
+    }
+
+    public void DisableDashSpeed()
+    {
+        moveSpeed = _initialMoveSpeed;
     }
 
     private void FlipCharacter(float horizontalInput)

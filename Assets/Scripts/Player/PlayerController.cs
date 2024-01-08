@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -7,9 +8,11 @@ public class PlayerController : MonoBehaviour
     public float attackCooldown;
     public GameObject sword;
 
-    [Header("Dash")] public float dashDistance;
-    public float dashDuration;
-    public bool isDashing;
+    [Header("Dash")] public float dashSpeed;
+    public float dashLength = 0.5f;
+    public float dashCooldown = 1f;
+    private float _dashCounter;
+    private float _dashCoolCounter;
 
     private float _nextAttackTime;
     private float _nextDashTime;
@@ -21,7 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _playerMovement = GetComponent<PlayerMovement>();
-        _nextDashTime = dashDuration;
+        // _nextDashTime = dashDuration;
     }
 
     void Update()
@@ -32,20 +35,29 @@ public class PlayerController : MonoBehaviour
             _nextAttackTime = Time.time + attackCooldown;
         }
 
-        if (Input.GetMouseButtonDown(1) && !isDashing)
+        if (Input.GetMouseButtonDown(1))
         {
-            Dash();
+            if (_dashCoolCounter <= 0 && _dashCounter <= 0)
+            {
+                _playerMovement.EnableDashSpeed(dashSpeed);
+                _dashCounter = dashLength;
+            }
         }
 
-        if (isDashing)
+        if (_dashCounter > 0)
         {
-            dashDuration -= Time.deltaTime;
+            _dashCounter -= Time.deltaTime;
 
-            if (dashDuration <= 0f)
+            if (_dashCounter <= 0)
             {
-                isDashing = false;
-                dashDuration = _nextDashTime;
+                _playerMovement.DisableDashSpeed();
+                _dashCoolCounter = dashCooldown;
             }
+        }
+
+        if (_dashCoolCounter > 0)
+        {
+            _dashCoolCounter -= Time.deltaTime;
         }
     }
 
@@ -62,15 +74,5 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(attackCooldown);
         sword.GetComponent<Animator>().Play("New State");
         sword.GetComponent<BoxCollider2D>().enabled = false;
-    }
-
-    private void Dash()
-    {
-        isDashing = true;
-
-        _moveDirection = _playerMovement.ReturnPlayerDirection();
-
-        Vector3 dashPosition = transform.position + _moveDirection * dashDistance;
-        _rb.MovePosition(dashPosition);
     }
 }
