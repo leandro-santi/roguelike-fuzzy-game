@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,15 +15,12 @@ public class PlayerController : MonoBehaviour
 
     private float _nextAttackTime;
     private float _nextDashTime;
-    private Rigidbody2D _rb;
     private PlayerMovement _playerMovement;
     private Vector3 _moveDirection;
 
     void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
         _playerMovement = GetComponent<PlayerMovement>();
-        // _nextDashTime = dashDuration;
     }
 
     void Update()

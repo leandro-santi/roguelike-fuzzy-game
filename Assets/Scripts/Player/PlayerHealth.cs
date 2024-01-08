@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 3;
-    private int currentHealth;
+    private int _currentHealth;
 
     void Start()
     {
-        currentHealth = maxHealth;
+        _currentHealth = maxHealth;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -23,9 +21,9 @@ public class PlayerHealth : MonoBehaviour
 
     void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        _currentHealth -= damage;
 
-        if (currentHealth <= 0)
+        if (_currentHealth <= 0)
         {
             Die();
         }
