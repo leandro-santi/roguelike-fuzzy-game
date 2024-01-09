@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (!GameController.Instance.canPlayTheGame) return;
+        
         if (Input.GetMouseButtonDown(0) && Time.time > _nextAttackTime)
         {
             Attack();

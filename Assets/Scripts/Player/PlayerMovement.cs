@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
 
     private float _initialMoveSpeed;
+    private bool _stopMovement;
     private Rigidbody2D _rb;
     private Vector3 _moveDirection;
     private Animator _animator;
@@ -18,6 +19,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (!GameController.Instance.canPlayTheGame)
+        {
+            _stopMovement = true;
+            return;
+        }
+
+        _stopMovement = false;
+
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
@@ -38,6 +47,13 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (_stopMovement)
+        {
+            _rb.velocity = Vector2.zero;
+            _animator.SetBool("isWalking", false);
+            return;
+        }
+
         _rb.velocity = new Vector2(_moveDirection.x * moveSpeed, _moveDirection.y * moveSpeed);
     }
 
