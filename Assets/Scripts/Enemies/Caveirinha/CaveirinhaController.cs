@@ -1,3 +1,5 @@
+using System.Collections;
+using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 
 public class CaveirinhaController : MonoBehaviour
@@ -33,6 +35,8 @@ public class CaveirinhaController : MonoBehaviour
     private float _timeSinceLastAttack;
     private bool _isWalking;
 
+    private EnemyHealth _enemyHealth;
+
     void Start()
     {
         _currentState = EnemyState.Idle;
@@ -42,10 +46,14 @@ public class CaveirinhaController : MonoBehaviour
         _idleTimer = 0f;
         _walkTimer = 0f;
         _timeSinceLastAttack = 0f;
+
+        _enemyHealth = GetComponent<EnemyHealth>();
     }
 
     void Update()
     {
+        if (_enemyHealth.died) return;
+
         switch (_currentState)
         {
             case EnemyState.Idle:
@@ -133,9 +141,9 @@ public class CaveirinhaController : MonoBehaviour
 
         if (_timeSinceLastAttack >= timeBetweenAttacks)
         {
-            int randomAttack = Random.Range(0, 2);
+            int randomAttack = Random.Range(1, 11);
 
-            if (randomAttack == -1)
+            if (randomAttack <= 2)
             {
                 MeleeAttack();
             }
@@ -156,7 +164,9 @@ public class CaveirinhaController : MonoBehaviour
 
     void MeleeAttack()
     {
-        Debug.Log("Melee Attack!");
+        // Debug.Log("Melee Attack!");
+
+        StartCoroutine(Advance());
     }
 
     void RangedAttack()
@@ -175,6 +185,16 @@ public class CaveirinhaController : MonoBehaviour
         projectile.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
 
         Destroy(projectile.gameObject, 2f);
+    }
+
+    IEnumerator Advance()
+    {
+        gameObject.transform.position = _player.position;
+        gameObject.tag = "EnemyMelee";
+        gameObject.layer = 9;
+        yield return new WaitForSeconds(0.5f);
+        gameObject.layer = 7;
+        gameObject.tag = "Enemy";
     }
 
     private Vector2 ReturnRandomDirection()

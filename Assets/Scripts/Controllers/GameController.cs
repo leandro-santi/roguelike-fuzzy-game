@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour
         _timer = 0f;
 
         _canCountTimer = true;
-        canPlayTheGame = false;
+        canPlayTheGame = true;
         _pause = false;
         _isPaused = false;
         _gameStarted = false;
