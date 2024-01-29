@@ -26686,7 +26686,6 @@ GameObject:
   - component: {fileID: 1677721532}
   - component: {fileID: 1677721533}
   - component: {fileID: 1677721534}
-  - component: {fileID: 1677721535}
   m_Layer: 0
   m_Name: Square
   m_TagString: Enemy
@@ -26770,29 +26769,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1677721531}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0a8135423e18134b9013b527cf028d3, type: 3}
+  m_Script: {fileID: 11500000, guid: d7db9df4f8d04e71bc005e25027eab64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceThreshold: 10
-  calmPeakDistance: 5
-  fearPeakDistance: 15
-  angerPeakDistance: 25
-  couragePeakDistance: 35
-  fuzzyMembershipPeak: 1
---- !u!114 &1677721535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1677721531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eaaefef0aa3e2bce83735e78bec7e8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fuzzyLogicController: {fileID: 0}
-  player: {fileID: 986134383}
 --- !u!1 &1859678872
 GameObject:
   m_ObjectHideFlags: 0
@@ -29855,7 +29834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4545034324274261612, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4545034324274261612, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
       propertyPath: m_TagString
