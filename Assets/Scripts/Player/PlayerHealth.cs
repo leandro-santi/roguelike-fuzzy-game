@@ -47,7 +47,7 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("Player defeated!");
-        
+
         _sprite.color = Color.red;
     }
 

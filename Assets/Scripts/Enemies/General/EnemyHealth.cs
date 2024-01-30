@@ -6,8 +6,9 @@ public class EnemyHealth : MonoBehaviour
     public int maxHealth;
     public bool died;
     public int currentHealth;
-    private float _damageDelay;
+    public bool shieldIsOn;
     private bool _canTakeDamage;
+    private float _damageDelay;
 
     public float knockForce;
     public float knockDuration;
@@ -23,6 +24,7 @@ public class EnemyHealth : MonoBehaviour
 
         _isKnockedBack = false;
         died = false;
+        // shieldIsOn = false;
 
         _rb = GetComponent<Rigidbody2D>();
         _sprite = GetComponent<SpriteRenderer>();
@@ -51,6 +53,8 @@ public class EnemyHealth : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (shieldIsOn) return;
+        
         if (other.CompareTag("PlayerSword") && _canTakeDamage)
         {
             TakeDamage(1);

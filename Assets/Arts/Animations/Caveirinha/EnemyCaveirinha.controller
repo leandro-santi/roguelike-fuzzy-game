@@ -32,7 +32,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 0x72_DungeonTilesetII_v1_6_65
+  m_Name: EnemyCaveirinha
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
