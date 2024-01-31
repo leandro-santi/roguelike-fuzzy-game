@@ -33,8 +33,9 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if (!_gameStarted) return;
+        // if (!_gameStarted) return;
 
+        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _pause = !_pause;
@@ -50,13 +51,15 @@ public class GameController : MonoBehaviour
         }
 
         if (!_canCountTimer || !canPlayTheGame) return;
+        */
 
         if (_timer <= maxTimer) _timer += Time.deltaTime;
         else
         {
-            Debug.Log("Let's Go!");
+            // Debug.Log("Game Over!");
+
             _canCountTimer = false;
-            FinishGame();
+            // FinishGame();
         }
     }
 

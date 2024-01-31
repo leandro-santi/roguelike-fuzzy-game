@@ -42,8 +42,6 @@ public class JasonController : MonoBehaviour
         _timeSinceLastAttack = 0f;
 
         _enemyHealth = GetComponent<EnemyHealth>();
-
-        // Defense();
     }
 
     void Update()

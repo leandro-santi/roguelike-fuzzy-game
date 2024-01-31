@@ -24,7 +24,7 @@ public class EnemyHealth : MonoBehaviour
 
         _isKnockedBack = false;
         died = false;
-        // shieldIsOn = false;
+        shieldIsOn = false;
 
         _rb = GetComponent<Rigidbody2D>();
         _sprite = GetComponent<SpriteRenderer>();

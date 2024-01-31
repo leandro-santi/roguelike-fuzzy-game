@@ -9,11 +9,13 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     private Vector3 _moveDirection;
     private Animator _animator;
+    private TrailRenderer _trailRenderer;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        _trailRenderer = GetComponent<TrailRenderer>();
         _initialMoveSpeed = moveSpeed;
     }
 
@@ -64,12 +66,16 @@ public class PlayerMovement : MonoBehaviour
 
     public void EnableDashSpeed(float speed)
     {
+        gameObject.layer = 10;
         moveSpeed = speed;
+        _trailRenderer.emitting = true;
     }
 
     public void DisableDashSpeed()
     {
+        gameObject.layer = 6;
         moveSpeed = _initialMoveSpeed;
+        _trailRenderer.emitting = false;
     }
 
     private void FlipCharacter(float horizontalInput)
