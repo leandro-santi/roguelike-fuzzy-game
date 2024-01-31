@@ -43,7 +43,7 @@ public class JasonController : MonoBehaviour
 
         _enemyHealth = GetComponent<EnemyHealth>();
 
-        Defense();
+        // Defense();
     }
 
     void Update()

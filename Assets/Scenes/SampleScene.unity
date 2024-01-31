@@ -30054,6 +30054,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 0
+  knockForce: 100
+  knockDuration: 1
 --- !u!4 &9099434817306298541 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2279674899812052130, guid: ab9c8b85211406a558fae785dae2c9e3, type: 3}
