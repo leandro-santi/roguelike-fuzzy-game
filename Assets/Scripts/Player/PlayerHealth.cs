@@ -1,10 +1,14 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 3;
+    public int maxHealth;
     public int currentHealth;
+    private float _lifeRechargerTimer;
+    public float lifeRechargerInterval;
+    public GameObject[] hearts;
 
     private Rigidbody2D _rb;
     private SpriteRenderer _sprite;
@@ -13,12 +17,15 @@ public class PlayerHealth : MonoBehaviour
     public float knockDuration;
     private bool _isKnockedBack;
     private float _knockTimer;
+    private bool _isDead;
 
     void Start()
     {
         currentHealth = maxHealth;
-        
+        UpdateHearts();
+
         _isKnockedBack = false;
+        _isDead = false;
 
         _sprite = GetComponent<SpriteRenderer>();
         _rb = GetComponent<Rigidbody2D>();
@@ -36,6 +43,8 @@ public class PlayerHealth : MonoBehaviour
                 _rb.velocity = Vector2.zero;
             }
         }
+
+        LifeRecharge();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -67,9 +76,40 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    void UpdateHearts()
+    {
+        foreach (var heart in hearts)
+        {
+            heart.SetActive(false);
+        }
+
+        for (var heart = 0; heart < currentHealth; heart++)
+        {
+            hearts[heart].SetActive(true);
+        }
+    }
+
+    void LifeRecharge()
+    {
+        if (currentHealth == maxHealth) return;
+
+        _lifeRechargerTimer += Time.deltaTime;
+
+        if (_lifeRechargerTimer >= lifeRechargerInterval)
+        {
+            _lifeRechargerTimer = 0f;
+            currentHealth += 1;
+            UpdateHearts();
+        }
+    }
+
     void TakeDamage(int damage)
     {
+        if (_isDead) return;
+
         currentHealth -= damage;
+
+        UpdateHearts();
 
         if (currentHealth <= 0)
         {
@@ -84,6 +124,7 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Player defeated!");
 
         _sprite.color = Color.red;
+        _isDead = true;
     }
 
     IEnumerator DamageFeedback()

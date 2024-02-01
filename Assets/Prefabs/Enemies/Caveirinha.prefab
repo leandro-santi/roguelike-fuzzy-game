@@ -170,6 +170,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+  died: 0
+  currentHealth: 0
+  shieldIsOn: 0
+  knockForce: 10
+  knockDuration: 0.5
 --- !u!114 &4545034324274261608
 MonoBehaviour:
   m_ObjectHideFlags: 0

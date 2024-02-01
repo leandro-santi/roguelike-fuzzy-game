@@ -5619,7 +5619,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.6_262
+      name: life_1
       rect:
         serializedVersion: 2
         x: 289
@@ -5640,7 +5640,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.6_263
+      name: life_2
       rect:
         serializedVersion: 2
         x: 305
@@ -5661,7 +5661,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.6_264
+      name: life_3
       rect:
         serializedVersion: 2
         x: 321
@@ -6502,9 +6502,6 @@ TextureImporter:
       0x72_DungeonTilesetII_v1.6_26: 390756373
       0x72_DungeonTilesetII_v1.6_260: 1806606872
       0x72_DungeonTilesetII_v1.6_261: 1639458375
-      0x72_DungeonTilesetII_v1.6_262: -880352492
-      0x72_DungeonTilesetII_v1.6_263: -1901338566
-      0x72_DungeonTilesetII_v1.6_264: 2069892139
       0x72_DungeonTilesetII_v1.6_265: -320668891
       0x72_DungeonTilesetII_v1.6_266: -1130471946
       0x72_DungeonTilesetII_v1.6_267: -1801952379
@@ -6616,6 +6613,9 @@ TextureImporter:
       caveirinha_head: 1797923940
       collision: 194938037
       collision_1: 1720019757
+      life_1: -880352492
+      life_2: -1901338566
+      life_3: 2069892139
       weapon_0: 1885492009
   spritePackingTag: 
   pSDRemoveMatte: 0

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,7 @@ public class GameController : MonoBehaviour
     [Header("UI")] public GameObject gameUI;
     public GameObject playerUI;
     public GameObject pauseUI;
+    public TextMeshProUGUI timerText;
 
     public static GameController Instance;
 
@@ -53,7 +55,15 @@ public class GameController : MonoBehaviour
         if (!_canCountTimer || !canPlayTheGame) return;
         */
 
-        if (_timer <= maxTimer) _timer += Time.deltaTime;
+        if (_timer <= maxTimer)
+        {
+            _timer += Time.deltaTime;
+
+            int minutes = Mathf.FloorToInt(_timer / 60);
+            int remainingSeconds = Mathf.FloorToInt(_timer % 60);
+
+            timerText.text = minutes.ToString("00") + ":" + remainingSeconds.ToString("00");
+        }
         else
         {
             // Debug.Log("Game Over!");
