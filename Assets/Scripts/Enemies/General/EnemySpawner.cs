@@ -23,15 +23,13 @@ public class EnemySpawner : MonoBehaviour
 
         if (_timeSinceLastSpawn >= _spawnInterval)
         {
+            if (_gameTimer >= 120f) return;
+
             SpawnEnemy();
             _timeSinceLastSpawn = 0f;
             _spawnInterval -= (_spawnInterval * 5) / 100;
-            Debug.Log(_spawnInterval);
-        }
 
-        if (_gameTimer >= 300f)
-        {
-            Debug.Log("Game Over! No more enemies will be spawned.");
+            // Debug.Log(_spawnInterval);
         }
     }
 
