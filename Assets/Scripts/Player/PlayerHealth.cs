@@ -67,6 +67,8 @@ public class PlayerHealth : MonoBehaviour
 
     void ApplyKnock(Vector3 contactPosition)
     {
+        if (_isDead) return;
+
         if (_rb != null && !_isKnockedBack)
         {
             Vector2 knockDirection = (transform.position - contactPosition).normalized;
@@ -91,7 +93,7 @@ public class PlayerHealth : MonoBehaviour
 
     void LifeRecharge()
     {
-        if (currentHealth == maxHealth) return;
+        if ((currentHealth == maxHealth) || _isDead) return;
 
         _lifeRechargerTimer += Time.deltaTime;
 
