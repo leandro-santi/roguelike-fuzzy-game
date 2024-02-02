@@ -39,4 +39,15 @@ public class EnemySpawner : MonoBehaviour
         Transform spawnPoint = spawnPointsList[Random.Range(0, spawnPointsList.Count)];
         Instantiate(enemyToSpawn, spawnPoint.position, Quaternion.identity);
     }
+
+    public void ScreamSpawnEnemies(int count)
+    {
+        while (count > 0)
+        {
+            GameObject enemyToSpawn = enemyList[Random.Range(0, enemyList.Count)];
+            Transform spawnPoint = spawnPointsList[Random.Range(0, spawnPointsList.Count)];
+            Instantiate(enemyToSpawn, spawnPoint.position, Quaternion.identity);
+            count--;
+        }
+    }
 }

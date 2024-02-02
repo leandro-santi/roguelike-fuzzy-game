@@ -183,9 +183,24 @@ public class JasonController : MonoBehaviour
     #region FuzzyEvents
 
     // Fear
+
+    #region Fear
+
     void Defense()
     {
         StartCoroutine(Shield());
+    }
+
+    void Dodge()
+    {
+        Vector2 dodgePosition = (Vector2)transform.position + Random.insideUnitCircle.normalized * 1f;
+
+        gameObject.transform.position = dodgePosition;
+    }
+
+    void Scream()
+    {
+        FindObjectOfType<EnemySpawner>().ScreamSpawnEnemies(2);
     }
 
     IEnumerator Shield()
@@ -197,9 +212,23 @@ public class JasonController : MonoBehaviour
         _enemyHealth.shieldIsOn = false;
     }
 
+    #endregion
+
     // Courage
 
-    // Attack
+    #region Courage
+
+    // alo
+
+    #endregion
+
+    // Angry
+
+    #region Angry
+
+    // alo
+
+    #endregion
 
     #endregion
 }
