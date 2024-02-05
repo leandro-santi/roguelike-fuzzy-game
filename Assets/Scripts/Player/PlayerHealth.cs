@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -12,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
 
     private Rigidbody2D _rb;
     private SpriteRenderer _sprite;
+    private PlayerMovement _playerMovement;
 
     public float knockForce;
     public float knockDuration;
@@ -29,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
 
         _sprite = GetComponent<SpriteRenderer>();
         _rb = GetComponent<Rigidbody2D>();
+        _playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void Update()
@@ -63,6 +64,12 @@ public class PlayerHealth : MonoBehaviour
             TakeDamage(1);
             ApplyKnock(other.transform.position);
         }
+
+        if (other.gameObject.CompareTag("EnemyStun"))
+        {
+            TakeDamage(1);
+            StartCoroutine(ApplyStun());
+        }
     }
 
     void ApplyKnock(Vector3 contactPosition)
@@ -76,6 +83,13 @@ public class PlayerHealth : MonoBehaviour
             _isKnockedBack = true;
             _knockTimer = knockDuration;
         }
+    }
+
+    IEnumerator ApplyStun()
+    {
+        _playerMovement.ApplyStun(true);
+        yield return new WaitForSeconds(2f);
+        _playerMovement.ApplyStun(false);
     }
 
     void UpdateHearts()

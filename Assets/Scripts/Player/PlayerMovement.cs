@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float _initialMoveSpeed;
     private bool _stopMovement;
+    private bool _stunned;
     private Rigidbody2D _rb;
     private Vector3 _moveDirection;
     private Animator _animator;
@@ -49,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (_stopMovement)
+        if (_stopMovement || _stunned)
         {
             _rb.velocity = Vector2.zero;
             _animator.SetBool("isWalking", false);
@@ -76,6 +77,11 @@ public class PlayerMovement : MonoBehaviour
         gameObject.layer = 6;
         moveSpeed = _initialMoveSpeed;
         _trailRenderer.emitting = false;
+    }
+
+    public void ApplyStun(bool flag)
+    {
+        _stunned = flag;
     }
 
     private void FlipCharacter(float horizontalInput)

@@ -4842,7 +4842,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.6_225
+      name: bomb_1
       rect:
         serializedVersion: 2
         x: 289
@@ -4863,7 +4863,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.6_226
+      name: bomb_2
       rect:
         serializedVersion: 2
         x: 304
@@ -4884,11 +4884,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 0x72_DungeonTilesetII_v1.6_227
+      name: bomb_3
       rect:
         serializedVersion: 2
         x: 320
-        y: 177
+        y: 178
         width: 15
         height: 13
       alignment: 7
@@ -6461,9 +6461,6 @@ TextureImporter:
       0x72_DungeonTilesetII_v1.6_222: 1129986143
       0x72_DungeonTilesetII_v1.6_223: -1161664379
       0x72_DungeonTilesetII_v1.6_224: -600646255
-      0x72_DungeonTilesetII_v1.6_225: 1176575247
-      0x72_DungeonTilesetII_v1.6_226: 1672424145
-      0x72_DungeonTilesetII_v1.6_227: 848935738
       0x72_DungeonTilesetII_v1.6_228: 420471784
       0x72_DungeonTilesetII_v1.6_229: -1305588475
       0x72_DungeonTilesetII_v1.6_23: -1349646060
@@ -6610,6 +6607,9 @@ TextureImporter:
       0x72_DungeonTilesetII_v1.6_97: 1751153707
       0x72_DungeonTilesetII_v1.6_98: 533937229
       0x72_DungeonTilesetII_v1.6_99: 1329700948
+      bomb_1: 1176575247
+      bomb_2: 1672424145
+      bomb_3: 848935738
       caveirinha_head: 1797923940
       collision: 194938037
       collision_1: 1720019757

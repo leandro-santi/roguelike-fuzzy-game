@@ -8,6 +8,7 @@ TagManager:
   - PlayerSword
   - EnemyProjectile
   - EnemyMelee
+  - EnemyStun
   layers:
   - Default
   - TransparentFX

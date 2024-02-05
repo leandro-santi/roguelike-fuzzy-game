@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2605402
 Transform:
   m_ObjectHideFlags: 0
@@ -28117,6 +28117,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Peste
       objectReference: {fileID: 0}
+    - target: {fileID: 5418062320666666824, guid: a3c73b89774ca3a79a6f66bdb07ea753, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5418062320666666829, guid: a3c73b89774ca3a79a6f66bdb07ea753, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -31150,6 +31154,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Caveirinha
       objectReference: {fileID: 0}
+    - target: {fileID: 4545034324274261612, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
 --- !u!1001 &7053947631520113679
@@ -31206,6 +31214,18 @@ PrefabInstance:
     - target: {fileID: 2279674899812052135, guid: ab9c8b85211406a558fae785dae2c9e3, type: 3}
       propertyPath: m_Name
       value: Jason
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099434817306298548, guid: ab9c8b85211406a558fae785dae2c9e3, type: 3}
+      propertyPath: bombSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099434817306298548, guid: ab9c8b85211406a558fae785dae2c9e3, type: 3}
+      propertyPath: bombPrefab
+      value: 
+      objectReference: {fileID: 5601560752871799364, guid: 6040481ed1a2c5a7ca243ca9534b96d8, type: 3}
+    - target: {fileID: 9099434817306298548, guid: ab9c8b85211406a558fae785dae2c9e3, type: 3}
+      propertyPath: explosionSpeed
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab9c8b85211406a558fae785dae2c9e3, type: 3}

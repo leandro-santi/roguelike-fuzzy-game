@@ -66,9 +66,10 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            // Debug.Log("Game Over!");
+            Debug.Log("Game Over!");
 
             _canCountTimer = false;
+
             // FinishGame();
         }
     }
@@ -112,7 +113,6 @@ public class GameController : MonoBehaviour
 
     public void RestartGame()
     {
-        Debug.Log("Was called");
         SceneManager.LoadScene("SampleScene");
     }
 }

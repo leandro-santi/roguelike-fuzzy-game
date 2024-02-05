@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class JasonController : MonoBehaviour
 {
@@ -17,9 +18,12 @@ public class JasonController : MonoBehaviour
 
     [Header("Chase")] public float chaseSpeed;
     public float chaseRange;
+    public float explosionSpeed;
 
     [Header("Attack")] public float attackRange;
     public float attackCooldown;
+    public Transform bombPrefab;
+    public float bombSpeed;
 
     [Header("Defense")] public GameObject shield;
 
@@ -218,7 +222,44 @@ public class JasonController : MonoBehaviour
 
     #region Courage
 
-    // alo
+    void Explosion()
+    {
+        StartCoroutine(IncreaseSpeed());
+    }
+
+    void Bomb()
+    {
+        Transform projectile = Instantiate(bombPrefab, transform.position, Quaternion.identity);
+
+        Vector2 direction = (_player.position - transform.position).normalized;
+
+        projectile.GetComponent<Rigidbody2D>().velocity = direction * bombSpeed;
+
+        Destroy(projectile.gameObject, 2f);
+    }
+
+    void ApplyStun()
+    {
+        StartCoroutine(Stun());
+    }
+
+    IEnumerator Stun()
+    {
+        var o = gameObject;
+        o.transform.position = _player.position;
+        o.tag = "EnemyStun";
+        o.layer = 9;
+        yield return new WaitForSeconds(0.5f);
+        o.layer = 7;
+        o.tag = "Enemy";
+    }
+
+    IEnumerator IncreaseSpeed()
+    {
+        chaseSpeed = explosionSpeed;
+        yield return new WaitForSeconds(10f);
+        chaseSpeed = 2f;
+    }
 
     #endregion
 
@@ -226,7 +267,19 @@ public class JasonController : MonoBehaviour
 
     #region Angry
 
-    // alo
+    void AngryMode()
+    {
+        StartCoroutine(EnableAngryMode());
+    }
+
+    IEnumerator EnableAngryMode()
+    {
+        attackCooldown = 0.5f;
+        attackRange = 4f;
+        yield return new WaitForSeconds(10f);
+        attackCooldown = 1f;
+        attackRange = 2f;
+    }
 
     #endregion
 
