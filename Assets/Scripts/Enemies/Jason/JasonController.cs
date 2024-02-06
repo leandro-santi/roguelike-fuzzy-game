@@ -35,6 +35,7 @@ public class JasonController : MonoBehaviour
     private float _timeSinceLastAttack;
 
     private EnemyHealth _enemyHealth;
+    private FuzzyController _fuzzy;
 
     void Start()
     {
@@ -46,10 +47,13 @@ public class JasonController : MonoBehaviour
         _timeSinceLastAttack = 0f;
 
         _enemyHealth = GetComponent<EnemyHealth>();
+        _fuzzy = GetComponent<FuzzyController>();
     }
 
     void Update()
     {
+        Debug.Log(_fuzzy.emotion);
+        
         if (_enemyHealth.died) return;
 
         if (shield.activeSelf)

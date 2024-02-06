@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class FuzzyController : MonoBehaviour
 {
-    private float distanceToPlayer;
+    public string emotion;
 
+    private float distanceToPlayer;
     private float nearDistance = 5f;
     private float mediumDistance = 10f;
     private float farDistance = 15f;
@@ -33,7 +34,7 @@ public class FuzzyController : MonoBehaviour
         return TriangularMembership(distanceToPlayer, farDistance - 2f, farDistance + 2f, float.MaxValue);
     }
 
-    private void FuzzyEmotionCalculation()
+    private string FuzzyEmotionCalculation()
     {
         float calmMembership = CalculateCalmMembership();
         float fearMembership = CalculateFearMembership();
@@ -49,15 +50,16 @@ public class FuzzyController : MonoBehaviour
             float braveEmotion = braveMembership / totalMembership;
             float angryEmotion = angryMembership / totalMembership;
 
-            Debug.Log($"Calm: {calmEmotion}, Fear: {fearEmotion}, Brave: {braveEmotion}, Angry: {angryEmotion}");
+            // Debug.Log($"Calm: {calmEmotion}, Fear: {fearEmotion}, Brave: {braveEmotion}, Angry: {angryEmotion}");
 
             string emotionalState = DetermineEmotionalState(calmEmotion, fearEmotion, braveEmotion, angryEmotion);
-            Debug.Log($"Emotional State: {emotionalState}");
+
+            // Debug.Log($"Emotional State: {emotionalState}");
+
+            return emotionalState;
         }
-        else
-        {
-            Debug.LogError("Erro: totalMembership é zero. Verifique seus parâmetros de lógica fuzzy.");
-        }
+
+        return "";
     }
 
     private string DetermineEmotionalState(float calm, float fear, float brave, float angry)
@@ -83,6 +85,11 @@ public class FuzzyController : MonoBehaviour
     private void Update()
     {
         UpdateDistanceToPlayer();
-        FuzzyEmotionCalculation();
+        emotion = FuzzyEmotionCalculation();
+    }
+
+    public string ReturnEmotion()
+    {
+        return emotion;
     }
 }
