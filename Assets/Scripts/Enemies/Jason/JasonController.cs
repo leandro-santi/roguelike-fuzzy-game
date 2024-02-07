@@ -52,7 +52,7 @@ public class JasonController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(_fuzzy.emotion);
+        // Debug.Log(_fuzzy.emotion);
         
         if (_enemyHealth.died) return;
 

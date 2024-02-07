@@ -27739,11 +27739,6 @@ Transform:
   m_Father: {fileID: 2605402}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1545751726 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2279674899812052135, guid: ab9c8b85211406a558fae785dae2c9e3, type: 3}
-  m_PrefabInstance: {fileID: 7053947631520113679}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1677721531
 GameObject:
   m_ObjectHideFlags: 0
@@ -27841,6 +27836,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7db9df4f8d04e71bc005e25027eab64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emotion: 
+  emotionFeedback: {fileID: 0}
 --- !u!1 &1753975680
 GameObject:
   m_ObjectHideFlags: 0
@@ -28121,10 +28118,6 @@ PrefabInstance:
     - target: {fileID: 5418062320666666824, guid: a3c73b89774ca3a79a6f66bdb07ea753, type: 3}
       propertyPath: m_Name
       value: Peste
-      objectReference: {fileID: 0}
-    - target: {fileID: 5418062320666666824, guid: a3c73b89774ca3a79a6f66bdb07ea753, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5418062320666666829, guid: a3c73b89774ca3a79a6f66bdb07ea753, type: 3}
       propertyPath: m_RootOrder
@@ -31159,10 +31152,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Caveirinha
       objectReference: {fileID: 0}
-    - target: {fileID: 4545034324274261612, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aeea4d3660d0c7344b689828ecb85765, type: 3}
 --- !u!1001 &7053947631520113679
@@ -31220,18 +31209,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jason
       objectReference: {fileID: 0}
-    - target: {fileID: 9099434817306298548, guid: ab9c8b85211406a558fae785dae2c9e3, type: 3}
-      propertyPath: bombSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9099434817306298548, guid: ab9c8b85211406a558fae785dae2c9e3, type: 3}
-      propertyPath: bombPrefab
-      value: 
-      objectReference: {fileID: 5601560752871799364, guid: 6040481ed1a2c5a7ca243ca9534b96d8, type: 3}
-    - target: {fileID: 9099434817306298548, guid: ab9c8b85211406a558fae785dae2c9e3, type: 3}
-      propertyPath: explosionSpeed
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab9c8b85211406a558fae785dae2c9e3, type: 3}
 --- !u!1001 &7764536866684004327
@@ -31241,6 +31218,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7764536866684004329, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
+      propertyPath: maxHealth
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7764536866684004329, guid: a3cf6634040e79a48917b25bea2dfcc4, type: 3}
       propertyPath: hearts.Array.data[0]
       value: 
@@ -31328,15 +31309,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2279674899812052130, guid: ab9c8b85211406a558fae785dae2c9e3, type: 3}
   m_PrefabInstance: {fileID: 7053947631520113679}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9099434817306298548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1545751726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7db9df4f8d04e71bc005e25027eab64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
