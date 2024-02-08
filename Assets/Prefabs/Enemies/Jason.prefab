@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1338398425
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1378668739, guid: 02555c5b4aae180488cc4902f37c9cdb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -381,3 +381,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emotion: 
   emotionFeedback: {fileID: 6565673292652489171}
+  emotionTextFeedback: {fileID: 0}

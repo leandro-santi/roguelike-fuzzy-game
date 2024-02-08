@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class JasonController : MonoBehaviour
 {
@@ -33,9 +36,15 @@ public class JasonController : MonoBehaviour
     private float _idleTimer;
     private float _walkTimer;
     private float _timeSinceLastAttack;
+    private float _emotionTimer;
 
     private EnemyHealth _enemyHealth;
     private FuzzyController _fuzzy;
+    
+    // Fuzzy Functions List
+    private readonly List<Action> _fearFunctionList = new List<Action>();
+    private readonly List<Action> _braveFunctionList = new List<Action>();
+    private readonly List<Action> _angryFunctionList = new List<Action>();
 
     void Start()
     {
@@ -45,21 +54,58 @@ public class JasonController : MonoBehaviour
         _idleTimer = 0f;
         _walkTimer = 0f;
         _timeSinceLastAttack = 0f;
+        _emotionTimer = 5f;
 
         _enemyHealth = GetComponent<EnemyHealth>();
         _fuzzy = GetComponent<FuzzyController>();
+        
+        _fearFunctionList.Add(Defense);
+        _fearFunctionList.Add(Dodge);
+        _fearFunctionList.Add(Scream);
+        
+        _braveFunctionList.Add(Explosion);
+        _braveFunctionList.Add(Bomb);
+        _braveFunctionList.Add(ApplyStun);
+        
+        _angryFunctionList.Add(AngryMode);
     }
 
     void Update()
     {
         // Debug.Log(_fuzzy.emotion);
-        
+
         if (_enemyHealth.died) return;
 
         if (shield.activeSelf)
         {
             Chase();
             return;
+        }
+
+        _emotionTimer += Time.deltaTime;
+
+        if (_emotionTimer >= 10f)
+        {
+            switch (_fuzzy.emotion)
+            {
+                case "Calm":
+                    break;
+                case "Fear":
+                    _fearFunctionList[Random.Range(0, 3)].Invoke();
+                    StartCoroutine(_fuzzy.StopEmotion());
+                    _emotionTimer = 0f;
+                    break;
+                case "Brave":
+                    _braveFunctionList[Random.Range(0, 3)].Invoke();
+                    StartCoroutine(_fuzzy.StopEmotion());
+                    _emotionTimer = 0f;
+                    break;
+                case "Angry":
+                    _angryFunctionList[0].Invoke();
+                    StartCoroutine(_fuzzy.StopEmotion());
+                    _emotionTimer = 0f;
+                    break;
+            }
         }
 
         switch (_currentState)
@@ -215,7 +261,7 @@ public class JasonController : MonoBehaviour
     {
         _enemyHealth.shieldIsOn = true;
         shield.SetActive(true);
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         shield.SetActive(false);
         _enemyHealth.shieldIsOn = false;
     }
@@ -261,7 +307,7 @@ public class JasonController : MonoBehaviour
     IEnumerator IncreaseSpeed()
     {
         chaseSpeed = explosionSpeed;
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         chaseSpeed = 2f;
     }
 
@@ -280,7 +326,7 @@ public class JasonController : MonoBehaviour
     {
         attackCooldown = 0.5f;
         attackRange = 4f;
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         attackCooldown = 1f;
         attackRange = 2f;
     }

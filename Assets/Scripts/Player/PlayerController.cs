@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -13,6 +14,9 @@ public class PlayerController : MonoBehaviour
     private float _dashCounter;
     private float _dashCoolCounter;
 
+    public TextMeshProUGUI killsText;
+    private int _kills;
+
     private float _nextAttackTime;
     private float _nextDashTime;
     private PlayerMovement _playerMovement;
@@ -26,7 +30,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (!GameController.Instance.canPlayTheGame) return;
-        
+
         if (Input.GetMouseButtonDown(0) && Time.time > _nextAttackTime)
         {
             Attack();
@@ -72,5 +76,11 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(attackCooldown);
         sword.GetComponent<Animator>().Play("New State");
         sword.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    public void CountKill()
+    {
+        _kills++;
+        killsText.text = "Kills: " + _kills;
     }
 }

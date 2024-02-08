@@ -1,9 +1,14 @@
+using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class FuzzyController : MonoBehaviour
 {
     public string emotion;
     public SpriteRenderer emotionFeedback;
+    private bool _stop;
+    private float _timer;
 
     // Linguistic Variables
     private float distanceToPlayer;
@@ -33,7 +38,7 @@ public class FuzzyController : MonoBehaviour
 
     private float CalculateCalmMembership()
     {
-        var distance = TriangularMembership(distanceToPlayer, 0f, nearDistance, mediumDistance);
+        var distance = TriangularMembership(distanceToPlayer, mediumDistance, farDistance, float.MaxValue);
 
         // var playerH = TriangularMembership(playerHealth, mediumHealthThreshold, highHealthThreshold, highHealthThreshold);
         var playerH = TriangularMembership(playerHealth, 3f, 5f, 7f);
@@ -49,7 +54,7 @@ public class FuzzyController : MonoBehaviour
 
     private float CalculateFearMembership()
     {
-        var distance = TriangularMembership(distanceToPlayer, 0f, nearDistance, mediumDistance);
+        var distance = TriangularMembership(distanceToPlayer, 0f, nearDistance, nearDistance + 2);
 
         // var playerH = TriangularMembership(playerHealth, 0f, mediumHealthThreshold, highHealthThreshold);
         var playerH = TriangularMembership(playerHealth, 4f, 6f, float.MaxValue);
@@ -65,7 +70,7 @@ public class FuzzyController : MonoBehaviour
 
     private float CalculateBraveMembership()
     {
-        var distance = TriangularMembership(distanceToPlayer, 0f, nearDistance, mediumDistance);
+        var distance = TriangularMembership(distanceToPlayer, nearDistance, mediumDistance, mediumDistance + 2);
 
         // var playerH = TriangularMembership(playerHealth, 0f, lowHealthThreshold, lowHealthThreshold + 2);
         var playerH = TriangularMembership(playerHealth, 0f, 3f, 5f);
@@ -81,7 +86,7 @@ public class FuzzyController : MonoBehaviour
 
     private float CalculateAngryMembership()
     {
-        var distance = TriangularMembership(distanceToPlayer, 0f, nearDistance, mediumDistance);
+        var distance = TriangularMembership(distanceToPlayer, nearDistance, mediumDistance, mediumDistance + 2);
 
         // var playerH = TriangularMembership(playerHealth, 0f, lowHealthThreshold, mediumHealthThreshold);
         var playerH = TriangularMembership(playerHealth, 0f, 2f, 4f);
@@ -156,31 +161,53 @@ public class FuzzyController : MonoBehaviour
         enemyCount = FindObjectsOfType<EnemyHealth>().Length;
     }
 
+    private void Start()
+    {
+        emotionFeedback.color = Color.green;
+    }
+
     private void Update()
     {
-        UpdateDistanceToPlayer();
-        UpdatePlayerHealth();
-        UpdateEnemyHealth();
-        UpdateEnemyCount();
+        if (_stop) return;
 
-        // Debug.Log($"Distance: {distanceToPlayer}, PlayerHealth: {playerHealth}, EnemyHealth: {enemyHealth}, Enemies: {enemyCount}");
+        _timer += Time.deltaTime;
 
-        emotion = FuzzyEmotionCalculation();
-
-        switch (emotion)
+        if (_timer >= 2f)
         {
-            case "Calm":
-                emotionFeedback.color = Color.green;
-                break;
-            case "Fear":
-                emotionFeedback.color = Color.black;
-                break;
-            case "Brave":
-                emotionFeedback.color = Color.blue;
-                break;
-            case "Angry":
-                emotionFeedback.color = Color.red;
-                break;
+            UpdateDistanceToPlayer();
+            UpdatePlayerHealth();
+            UpdateEnemyHealth();
+            UpdateEnemyCount();
+
+            Debug.Log(
+                $"Distance: {distanceToPlayer}, PlayerHealth: {playerHealth}, EnemyHealth: {enemyHealth}, Enemies: {enemyCount}");
+
+            emotion = FuzzyEmotionCalculation();
+
+            switch (emotion)
+            {
+                case "Calm":
+                    emotionFeedback.color = Color.green;
+                    break;
+                case "Fear":
+                    emotionFeedback.color = Color.black;
+                    break;
+                case "Brave":
+                    emotionFeedback.color = Color.blue;
+                    break;
+                case "Angry":
+                    emotionFeedback.color = Color.red;
+                    break;
+            }
+
+            _timer = 0f;
         }
+    }
+
+    public IEnumerator StopEmotion()
+    {
+        _stop = true;
+        yield return new WaitForSeconds(5f);
+        _stop = false;
     }
 }
