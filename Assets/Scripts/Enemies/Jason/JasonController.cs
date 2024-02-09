@@ -82,11 +82,13 @@ public class JasonController : MonoBehaviour
 
         _emotionTimer += Time.deltaTime;
 
-        if (_emotionTimer >= 3f)
+        if (_emotionTimer >= 3f && 
+            (_currentState == EnemyState.Chase || _currentState == EnemyState.Attack))
         {
             switch (_fuzzy.emotion)
             {
                 case "Calm":
+                    StartCoroutine(_fuzzy.StopEmotion());
                     _emotionTimer = 0f;
                     break;
                 case "Fear":
@@ -255,7 +257,7 @@ public class JasonController : MonoBehaviour
 
     void Scream()
     {
-        FindObjectOfType<EnemySpawner>().ScreamSpawnEnemies(2);
+        FindObjectOfType<EnemySpawner>().ScreamSpawnEnemies(1);
         StartCoroutine(Feedback(screamFeedback));
     }
     

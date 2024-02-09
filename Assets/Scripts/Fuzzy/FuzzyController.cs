@@ -8,7 +8,6 @@ public class FuzzyController : MonoBehaviour
     public string emotion;
     public SpriteRenderer emotionFeedback;
     private bool _stop;
-    private float _timer;
 
     // Linguistic Variables
     private float _distanceToPlayer;
@@ -118,7 +117,7 @@ public class FuzzyController : MonoBehaviour
 
             string emotionalState = DetermineEmotionalState(calmEmotion, fearEmotion, braveEmotion, angryEmotion);
 
-            Debug.Log($"Calm: {calmEmotion}, Fear: {fearEmotion}, Brave: {braveEmotion}, Angry: {angryEmotion}");
+            // Debug.Log($"Calm: {calmEmotion}, Fear: {fearEmotion}, Brave: {braveEmotion}, Angry: {angryEmotion}");
 
             return emotionalState;
         }
@@ -170,36 +169,29 @@ public class FuzzyController : MonoBehaviour
     {
         if (_stop) return;
 
-        _timer += Time.deltaTime;
+        UpdateDistanceToPlayer();
+        UpdatePlayerHealth();
+        UpdateEnemyHealth();
+        UpdateEnemyCount();
 
-        if (_timer >= 2f)
+        // Debug.Log($"Distance: {_distanceToPlayer}, PlayerHealth: {_playerHealth}, EnemyHealth: {_enemyHealth}, Enemies: {_enemyCount}");
+
+        emotion = FuzzyEmotionCalculation();
+
+        switch (emotion)
         {
-            UpdateDistanceToPlayer();
-            UpdatePlayerHealth();
-            UpdateEnemyHealth();
-            UpdateEnemyCount();
-
-            // Debug.Log($"Distance: {_distanceToPlayer}, PlayerHealth: {_playerHealth}, EnemyHealth: {_enemyHealth}, Enemies: {_enemyCount}");
-
-            emotion = FuzzyEmotionCalculation();
-
-            switch (emotion)
-            {
-                case "Calm":
-                    emotionFeedback.color = Color.green;
-                    break;
-                case "Fear":
-                    emotionFeedback.color = Color.black;
-                    break;
-                case "Brave":
-                    emotionFeedback.color = Color.blue;
-                    break;
-                case "Angry":
-                    emotionFeedback.color = Color.red;
-                    break;
-            }
-
-            _timer = 0f;
+            case "Calm":
+                emotionFeedback.color = Color.green;
+                break;
+            case "Fear":
+                emotionFeedback.color = Color.black;
+                break;
+            case "Brave":
+                emotionFeedback.color = Color.blue;
+                break;
+            case "Angry":
+                emotionFeedback.color = Color.red;
+                break;
         }
     }
 

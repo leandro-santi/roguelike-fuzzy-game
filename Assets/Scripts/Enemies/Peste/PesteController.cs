@@ -27,9 +27,6 @@ public class PesteController : MonoBehaviour
     public Transform projectilePrefab;
     public float projectileSpeed;
 
-    [Header("Defense")] public GameObject shield;
-    public GameObject screamFeedback;
-
     private Transform _player;
     private Vector2 _randomDirection;
 
@@ -37,6 +34,7 @@ public class PesteController : MonoBehaviour
     private float _walkTimer;
     private float _timeSinceLastAttack;
     private float _emotionTimer;
+    private bool _retreat;
 
     private EnemyHealth _enemyHealth;
     private FuzzyController _fuzzy;
@@ -56,25 +54,24 @@ public class PesteController : MonoBehaviour
         _timeSinceLastAttack = 0f;
         _emotionTimer = 0f;
 
+        _retreat = false;
+
         _enemyHealth = GetComponent<EnemyHealth>();
         _fuzzy = GetComponent<FuzzyController>();
 
-        // _fearFunctionList.Add(Defense);
-        // _fearFunctionList.Add(Dodge);
-        // _fearFunctionList.Add(Scream);
-        //
-        // _braveFunctionList.Add(Explosion);
-        // _braveFunctionList.Add(Bomb);
-        // _braveFunctionList.Add(ApplyStun);
-        //
-        // _angryFunctionList.Add(AngryMode);
+        _fearFunctionList.Add(Retreat);
+        
+        _braveFunctionList.Add(CadenceMin);
+        
+        _angryFunctionList.Add(CadenceMax);
+        _angryFunctionList.Add(Dodge);
     }
 
     void Update()
     {
         if (_enemyHealth.died) return;
 
-        if (shield.activeSelf)
+        if (_retreat)
         {
             Chase();
             return;
@@ -82,26 +79,27 @@ public class PesteController : MonoBehaviour
 
         _emotionTimer += Time.deltaTime;
 
-        if (_emotionTimer >= 3f)
+        if (_emotionTimer >= 3f && (_currentState == EnemyState.Chase || _currentState == EnemyState.Attack))
         {
             switch (_fuzzy.emotion)
             {
                 case "Calm":
+                    StartCoroutine(_fuzzy.StopEmotion());
                     _emotionTimer = 0f;
                     break;
                 case "Fear":
-                    // _fearFunctionList[Random.Range(0, 3)].Invoke();
-                    // StartCoroutine(_fuzzy.StopEmotion());
+                    _fearFunctionList[0].Invoke();
+                    StartCoroutine(_fuzzy.StopEmotion());
                     _emotionTimer = 0f;
                     break;
                 case "Brave":
-                    // _braveFunctionList[Random.Range(0, 3)].Invoke();
-                    // StartCoroutine(_fuzzy.StopEmotion());
+                    _braveFunctionList[0].Invoke();
+                    StartCoroutine(_fuzzy.StopEmotion());
                     _emotionTimer = 0f;
                     break;
                 case "Angry":
-                    // _angryFunctionList[0].Invoke();
-                    // StartCoroutine(_fuzzy.StopEmotion());
+                    _angryFunctionList[Random.Range(0, 2)].Invoke();
+                    StartCoroutine(_fuzzy.StopEmotion());
                     _emotionTimer = 0f;
                     break;
             }
@@ -165,7 +163,10 @@ public class PesteController : MonoBehaviour
     {
         Vector2 direction = (_player.position - transform.position).normalized;
 
-        if (shield.activeSelf) direction *= -1;
+        if (_retreat)
+        {
+            direction *= -1;
+        }
 
         transform.Translate(direction * (Time.deltaTime * chaseSpeed));
 
@@ -206,7 +207,14 @@ public class PesteController : MonoBehaviour
 
     void LaunchProjectile()
     {
+        StartCoroutine(Aim(0.5f));
+    }
+
+    IEnumerator Aim(float time)
+    {
         Transform projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+
+        yield return new WaitForSeconds(time);
 
         Vector2 direction = (_player.position - transform.position).normalized;
 
@@ -242,7 +250,19 @@ public class PesteController : MonoBehaviour
 
     #region Fear
 
-    // alo
+    private void Retreat()
+    {
+        StartCoroutine(EnableRetreat());
+    }
+
+    IEnumerator EnableRetreat()
+    {
+        _retreat = true;
+        chaseSpeed = 5f;
+        yield return new WaitForSeconds(3f);
+        chaseSpeed = 2f;
+        _retreat = false;
+    }
 
     #endregion
 
@@ -250,15 +270,42 @@ public class PesteController : MonoBehaviour
 
     #region Courage
 
-    // alo
+    private void CadenceMin()
+    {
+        StartCoroutine(MinCadence());
+    }
+
+    IEnumerator MinCadence()
+    {
+        attackCooldown = 0.5f;
+        yield return new WaitForSeconds(3f);
+        attackCooldown = 1f;
+    }
 
     #endregion
 
     // Angry
 
     #region Angry
+    
+    void Dodge()
+    {
+        Vector2 dodgePosition = (Vector2)transform.position + Random.insideUnitCircle.normalized * 1f;
 
-    // alo
+        gameObject.transform.position = dodgePosition;
+    }
+
+    private void CadenceMax()
+    {
+        StartCoroutine(MaxCadence());
+    }
+
+    IEnumerator MaxCadence()
+    {
+        attackCooldown = 0.25f;
+        yield return new WaitForSeconds(3f);
+        attackCooldown = 1f;
+    }
 
     #endregion
 
