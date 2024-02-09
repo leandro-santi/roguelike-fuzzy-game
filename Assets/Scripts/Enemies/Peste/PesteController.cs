@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PesteController : MonoBehaviour
 {
@@ -17,9 +20,15 @@ public class PesteController : MonoBehaviour
 
     [Header("Chase")] public float chaseSpeed;
     public float chaseRange;
+    public float explosionSpeed;
 
     [Header("Attack")] public float attackRange;
     public float attackCooldown;
+    public Transform projectilePrefab;
+    public float projectileSpeed;
+
+    [Header("Defense")] public GameObject shield;
+    public GameObject screamFeedback;
 
     private Transform _player;
     private Vector2 _randomDirection;
@@ -27,8 +36,15 @@ public class PesteController : MonoBehaviour
     private float _idleTimer;
     private float _walkTimer;
     private float _timeSinceLastAttack;
+    private float _emotionTimer;
 
     private EnemyHealth _enemyHealth;
+    private FuzzyController _fuzzy;
+
+    // Fuzzy Functions List
+    private readonly List<Action> _fearFunctionList = new List<Action>();
+    private readonly List<Action> _braveFunctionList = new List<Action>();
+    private readonly List<Action> _angryFunctionList = new List<Action>();
 
     void Start()
     {
@@ -38,13 +54,58 @@ public class PesteController : MonoBehaviour
         _idleTimer = 0f;
         _walkTimer = 0f;
         _timeSinceLastAttack = 0f;
+        _emotionTimer = 0f;
 
         _enemyHealth = GetComponent<EnemyHealth>();
+        _fuzzy = GetComponent<FuzzyController>();
+
+        // _fearFunctionList.Add(Defense);
+        // _fearFunctionList.Add(Dodge);
+        // _fearFunctionList.Add(Scream);
+        //
+        // _braveFunctionList.Add(Explosion);
+        // _braveFunctionList.Add(Bomb);
+        // _braveFunctionList.Add(ApplyStun);
+        //
+        // _angryFunctionList.Add(AngryMode);
     }
 
     void Update()
     {
         if (_enemyHealth.died) return;
+
+        if (shield.activeSelf)
+        {
+            Chase();
+            return;
+        }
+
+        _emotionTimer += Time.deltaTime;
+
+        if (_emotionTimer >= 3f)
+        {
+            switch (_fuzzy.emotion)
+            {
+                case "Calm":
+                    _emotionTimer = 0f;
+                    break;
+                case "Fear":
+                    // _fearFunctionList[Random.Range(0, 3)].Invoke();
+                    // StartCoroutine(_fuzzy.StopEmotion());
+                    _emotionTimer = 0f;
+                    break;
+                case "Brave":
+                    // _braveFunctionList[Random.Range(0, 3)].Invoke();
+                    // StartCoroutine(_fuzzy.StopEmotion());
+                    _emotionTimer = 0f;
+                    break;
+                case "Angry":
+                    // _angryFunctionList[0].Invoke();
+                    // StartCoroutine(_fuzzy.StopEmotion());
+                    _emotionTimer = 0f;
+                    break;
+            }
+        }
 
         switch (_currentState)
         {
@@ -104,6 +165,8 @@ public class PesteController : MonoBehaviour
     {
         Vector2 direction = (_player.position - transform.position).normalized;
 
+        if (shield.activeSelf) direction *= -1;
+
         transform.Translate(direction * (Time.deltaTime * chaseSpeed));
 
         FlipCharacter(_player.position);
@@ -124,7 +187,7 @@ public class PesteController : MonoBehaviour
 
         if (_timeSinceLastAttack >= attackCooldown)
         {
-            MeleeAttack();
+            RangedAttack();
             _timeSinceLastAttack = 0f;
         }
 
@@ -134,19 +197,22 @@ public class PesteController : MonoBehaviour
         }
     }
 
-    void MeleeAttack()
+    void RangedAttack()
     {
-        StartCoroutine(Advance());
+        // Debug.Log("Ranged Attack!");
+
+        LaunchProjectile();
     }
 
-    IEnumerator Advance()
+    void LaunchProjectile()
     {
-        gameObject.transform.position = _player.position;
-        gameObject.tag = "EnemyMelee";
-        gameObject.layer = 9;
-        yield return new WaitForSeconds(0.5f);
-        gameObject.layer = 7;
-        gameObject.tag = "Enemy";
+        Transform projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+
+        Vector2 direction = (_player.position - transform.position).normalized;
+
+        projectile.GetComponent<Rigidbody2D>().velocity = direction * projectileSpeed;
+
+        Destroy(projectile.gameObject, 2f);
     }
 
     private Vector2 ReturnRandomDirection()

@@ -277,8 +277,13 @@ MonoBehaviour:
   walkSpeed: 2
   chaseSpeed: 2
   chaseRange: 10
-  attackRange: 2
+  explosionSpeed: 0
+  attackRange: 6
   attackCooldown: 1
+  projectilePrefab: {fileID: 5601560752871799364, guid: 6040481ed1a2c5a7ca243ca9534b96d8, type: 3}
+  projectileSpeed: 10
+  shield: {fileID: 6094455269685536263}
+  screamFeedback: {fileID: 6094455269685536263}
 --- !u!114 &1923228917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,7 +370,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1338398425
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1378668739, guid: 02555c5b4aae180488cc4902f37c9cdb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

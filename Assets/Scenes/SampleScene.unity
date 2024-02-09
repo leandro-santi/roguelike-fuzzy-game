@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2605402
 Transform:
   m_ObjectHideFlags: 0
@@ -29070,10 +29070,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Peste
       objectReference: {fileID: 0}
-    - target: {fileID: 5418062320666666824, guid: a3c73b89774ca3a79a6f66bdb07ea753, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5418062320666666829, guid: a3c73b89774ca3a79a6f66bdb07ea753, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -32379,6 +32375,10 @@ PrefabInstance:
     - target: {fileID: 2279674899812052135, guid: ab9c8b85211406a558fae785dae2c9e3, type: 3}
       propertyPath: m_Name
       value: Jason
+      objectReference: {fileID: 0}
+    - target: {fileID: 2279674899812052135, guid: ab9c8b85211406a558fae785dae2c9e3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab9c8b85211406a558fae785dae2c9e3, type: 3}
