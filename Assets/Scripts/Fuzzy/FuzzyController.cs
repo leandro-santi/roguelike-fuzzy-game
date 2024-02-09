@@ -11,25 +11,25 @@ public class FuzzyController : MonoBehaviour
     private float _timer;
 
     // Linguistic Variables
-    private float distanceToPlayer;
-    private float playerHealth;
-    private float enemyHealth;
-    private float enemyCount;
+    private float _distanceToPlayer;
+    private float _playerHealth;
+    private float _enemyHealth;
+    private float _enemyCount;
 
     // Distance intervals
-    private float nearDistance = 5f;
-    private float mediumDistance = 10f;
-    private float farDistance = 15f;
+    private readonly float _nearDistance = 5f;
+    private readonly float _mediumDistance = 10f;
+    private readonly float _farDistance = 15f;
 
     // Health thresholds
-    private float lowHealthThreshold = 2f;
-    private float mediumHealthThreshold = 5f;
-    private float highHealthThreshold = 10f;
+    private float _lowHealthThreshold = 2f;
+    private float _mediumHealthThreshold = 5f;
+    private float _highHealthThreshold = 10f;
 
     // Enemy count thresholds
-    private float lowEnemyCountThreshold = 3f;
-    private float mediumEnemyCountThreshold = 6f;
-    private float highEnemyCountThreshold = 9f;
+    private float _lowEnemyCountThreshold = 3f;
+    private float _mediumEnemyCountThreshold = 6f;
+    private float _highEnemyCountThreshold = 9f;
 
     private float TriangularMembership(float x, float a, float b, float c)
     {
@@ -38,64 +38,64 @@ public class FuzzyController : MonoBehaviour
 
     private float CalculateCalmMembership()
     {
-        var distance = TriangularMembership(distanceToPlayer, mediumDistance, farDistance, float.MaxValue);
+        var distance = TriangularMembership(_distanceToPlayer, _mediumDistance, _farDistance, float.MaxValue);
 
         // var playerH = TriangularMembership(playerHealth, mediumHealthThreshold, highHealthThreshold, highHealthThreshold);
-        var playerH = TriangularMembership(playerHealth, 3f, 5f, 7f);
+        var playerH = TriangularMembership(_playerHealth, 3f, 5f, 7f);
 
         // var enemyH = TriangularMembership(enemyHealth, mediumHealthThreshold, highHealthThreshold, float.MaxValue);
-        var enemyH = TriangularMembership(enemyHealth, 4f, 5f, float.MaxValue);
+        var enemyH = TriangularMembership(_enemyHealth, 4f, 5f, float.MaxValue);
 
         // var enemyC = TriangularMembership(enemyCount, mediumHealthThreshold, highHealthThreshold, float.MaxValue);
-        var enemyC = TriangularMembership(enemyCount, 2f, 3f, 4f);
+        var enemyC = TriangularMembership(_enemyCount, 2f, 3f, 4f);
 
         return (distance + playerH + enemyH + enemyC) / 4;
     }
 
     private float CalculateFearMembership()
     {
-        var distance = TriangularMembership(distanceToPlayer, 0f, nearDistance, nearDistance + 2);
+        var distance = TriangularMembership(_distanceToPlayer, 0f, _nearDistance, _nearDistance + 2);
 
         // var playerH = TriangularMembership(playerHealth, 0f, mediumHealthThreshold, highHealthThreshold);
-        var playerH = TriangularMembership(playerHealth, 4f, 6f, float.MaxValue);
+        var playerH = TriangularMembership(_playerHealth, 4f, 6f, float.MaxValue);
 
         // var enemyH = TriangularMembership(enemyHealth, 0f, lowHealthThreshold, mediumHealthThreshold);
-        var enemyH = TriangularMembership(enemyHealth, 0f, 2f, 3f);
+        var enemyH = TriangularMembership(_enemyHealth, 0f, 2f, 3f);
 
         // var enemyC = TriangularMembership(enemyCount, 0f, lowEnemyCountThreshold, mediumEnemyCountThreshold);
-        var enemyC = TriangularMembership(enemyCount, 0f, 1f, 2f);
+        var enemyC = TriangularMembership(_enemyCount, 0f, 1f, 2f);
 
         return (distance + playerH + enemyH + enemyC) / 4;
     }
 
     private float CalculateBraveMembership()
     {
-        var distance = TriangularMembership(distanceToPlayer, nearDistance, mediumDistance, mediumDistance + 2);
+        var distance = TriangularMembership(_distanceToPlayer, _nearDistance, _mediumDistance, _mediumDistance + 2);
 
         // var playerH = TriangularMembership(playerHealth, 0f, lowHealthThreshold, lowHealthThreshold + 2);
-        var playerH = TriangularMembership(playerHealth, 0f, 3f, 5f);
+        var playerH = TriangularMembership(_playerHealth, 0f, 3f, 5f);
 
         // var enemyH = TriangularMembership(enemyHealth, mediumHealthThreshold, mediumHealthThreshold + 2, highHealthThreshold);
-        var enemyH = TriangularMembership(enemyHealth, 2f, 3f, 4f);
+        var enemyH = TriangularMembership(_enemyHealth, 2f, 3f, 4f);
 
         // var enemyC = TriangularMembership(enemyCount, mediumEnemyCountThreshold, highEnemyCountThreshold, float.MaxValue);
-        var enemyC = TriangularMembership(enemyCount, 3f, 4f, float.MaxValue);
+        var enemyC = TriangularMembership(_enemyCount, 3f, 4f, float.MaxValue);
 
         return (distance + playerH + enemyH + enemyC) / 4;
     }
 
     private float CalculateAngryMembership()
     {
-        var distance = TriangularMembership(distanceToPlayer, nearDistance, mediumDistance, mediumDistance + 2);
+        var distance = TriangularMembership(_distanceToPlayer, _nearDistance, _mediumDistance, _mediumDistance + 2);
 
         // var playerH = TriangularMembership(playerHealth, 0f, lowHealthThreshold, mediumHealthThreshold);
-        var playerH = TriangularMembership(playerHealth, 0f, 2f, 4f);
+        var playerH = TriangularMembership(_playerHealth, 0f, 2f, 4f);
 
         // var enemyH = TriangularMembership(enemyHealth, 0f, lowHealthThreshold, mediumHealthThreshold);
-        var enemyH = TriangularMembership(enemyHealth, 3f, 4f, 5f);
+        var enemyH = TriangularMembership(_enemyHealth, 3f, 4f, 5f);
 
         // var enemyC = TriangularMembership(enemyCount, mediumEnemyCountThreshold, highEnemyCountThreshold, float.MaxValue);
-        var enemyC = TriangularMembership(enemyCount, 1f, 2f, 3f);
+        var enemyC = TriangularMembership(_enemyCount, 1f, 2f, 3f);
 
         return (distance + playerH + enemyH + enemyC) / 4;
     }
@@ -142,23 +142,23 @@ public class FuzzyController : MonoBehaviour
 
     private void UpdateDistanceToPlayer()
     {
-        distanceToPlayer =
+        _distanceToPlayer =
             Vector3.Distance(transform.position, FindObjectOfType<PlayerController>().transform.position);
     }
 
     private void UpdatePlayerHealth()
     {
-        playerHealth = FindObjectOfType<PlayerHealth>().currentHealth;
+        _playerHealth = FindObjectOfType<PlayerHealth>().currentHealth;
     }
 
     private void UpdateEnemyHealth()
     {
-        enemyHealth = GetComponent<EnemyHealth>().currentHealth;
+        _enemyHealth = GetComponent<EnemyHealth>().currentHealth;
     }
 
     private void UpdateEnemyCount()
     {
-        enemyCount = FindObjectsOfType<EnemyHealth>().Length;
+        _enemyCount = FindObjectsOfType<EnemyHealth>().Length;
     }
 
     private void Start()
@@ -179,8 +179,7 @@ public class FuzzyController : MonoBehaviour
             UpdateEnemyHealth();
             UpdateEnemyCount();
 
-            Debug.Log(
-                $"Distance: {distanceToPlayer}, PlayerHealth: {playerHealth}, EnemyHealth: {enemyHealth}, Enemies: {enemyCount}");
+            // Debug.Log($"Distance: {_distanceToPlayer}, PlayerHealth: {_playerHealth}, EnemyHealth: {_enemyHealth}, Enemies: {_enemyCount}");
 
             emotion = FuzzyEmotionCalculation();
 

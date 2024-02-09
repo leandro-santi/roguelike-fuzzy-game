@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     private float _lifeRechargerTimer;
     public float lifeRechargerInterval;
     public GameObject[] hearts;
+    public TextMeshProUGUI stunFeedback;
 
     private Rigidbody2D _rb;
     private SpriteRenderer _sprite;
@@ -88,7 +90,9 @@ public class PlayerHealth : MonoBehaviour
     IEnumerator ApplyStun()
     {
         _playerMovement.ApplyStun(true);
+        stunFeedback.enabled = true;
         yield return new WaitForSeconds(2f);
+        stunFeedback.enabled = false;
         _playerMovement.ApplyStun(false);
     }
 

@@ -189,7 +189,9 @@ public class CaveirinhaController : MonoBehaviour
 
     IEnumerator Advance()
     {
-        gameObject.transform.position = _player.position;
+        Vector3 destination = _player.position;
+        yield return new WaitForSeconds(0.5f);
+        gameObject.transform.position = destination;
         gameObject.tag = "EnemyMelee";
         gameObject.layer = 9;
         yield return new WaitForSeconds(0.5f);

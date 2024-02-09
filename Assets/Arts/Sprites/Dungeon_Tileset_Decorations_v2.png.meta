@@ -1377,7 +1377,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Decorations_v2_60
+      name: scream
       rect:
         serializedVersion: 2
         x: 19
@@ -2325,7 +2325,6 @@ TextureImporter:
       Dungeon_Tileset_Decorations_v2_58: 2044152803
       Dungeon_Tileset_Decorations_v2_59: -342485860
       Dungeon_Tileset_Decorations_v2_6: -1017020745
-      Dungeon_Tileset_Decorations_v2_60: -405121125
       Dungeon_Tileset_Decorations_v2_61: 1280163942
       Dungeon_Tileset_Decorations_v2_62: 474635700
       Dungeon_Tileset_Decorations_v2_63: 1821270883
@@ -2368,6 +2367,7 @@ TextureImporter:
       Dungeon_Tileset_Decorations_v2_97: 1293376014
       Dungeon_Tileset_Decorations_v2_98: 1790170466
       Dungeon_Tileset_Decorations_v2_99: -572168715
+      scream: -405121125
       shield_1: 1232625152
       shield_2: 1723381124
       shield_3: 1378668739

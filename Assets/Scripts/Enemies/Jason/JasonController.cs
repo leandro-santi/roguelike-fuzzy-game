@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class JasonController : MonoBehaviour
@@ -29,6 +28,7 @@ public class JasonController : MonoBehaviour
     public float bombSpeed;
 
     [Header("Defense")] public GameObject shield;
+    public GameObject screamFeedback;
 
     private Transform _player;
     private Vector2 _randomDirection;
@@ -40,7 +40,7 @@ public class JasonController : MonoBehaviour
 
     private EnemyHealth _enemyHealth;
     private FuzzyController _fuzzy;
-    
+
     // Fuzzy Functions List
     private readonly List<Action> _fearFunctionList = new List<Action>();
     private readonly List<Action> _braveFunctionList = new List<Action>();
@@ -54,26 +54,24 @@ public class JasonController : MonoBehaviour
         _idleTimer = 0f;
         _walkTimer = 0f;
         _timeSinceLastAttack = 0f;
-        _emotionTimer = 5f;
+        _emotionTimer = 0f;
 
         _enemyHealth = GetComponent<EnemyHealth>();
         _fuzzy = GetComponent<FuzzyController>();
-        
+
         _fearFunctionList.Add(Defense);
         _fearFunctionList.Add(Dodge);
         _fearFunctionList.Add(Scream);
-        
+
         _braveFunctionList.Add(Explosion);
         _braveFunctionList.Add(Bomb);
         _braveFunctionList.Add(ApplyStun);
-        
+
         _angryFunctionList.Add(AngryMode);
     }
 
     void Update()
     {
-        // Debug.Log(_fuzzy.emotion);
-
         if (_enemyHealth.died) return;
 
         if (shield.activeSelf)
@@ -84,11 +82,12 @@ public class JasonController : MonoBehaviour
 
         _emotionTimer += Time.deltaTime;
 
-        if (_emotionTimer >= 10f)
+        if (_emotionTimer >= 3f)
         {
             switch (_fuzzy.emotion)
             {
                 case "Calm":
+                    _emotionTimer = 0f;
                     break;
                 case "Fear":
                     _fearFunctionList[Random.Range(0, 3)].Invoke();
@@ -205,7 +204,9 @@ public class JasonController : MonoBehaviour
 
     IEnumerator Advance()
     {
-        gameObject.transform.position = _player.position;
+        Vector3 destination = _player.position;
+        yield return new WaitForSeconds(0.5f);
+        gameObject.transform.position = destination;
         gameObject.tag = "EnemyMelee";
         gameObject.layer = 9;
         yield return new WaitForSeconds(0.5f);
@@ -255,15 +256,23 @@ public class JasonController : MonoBehaviour
     void Scream()
     {
         FindObjectOfType<EnemySpawner>().ScreamSpawnEnemies(2);
+        StartCoroutine(Feedback(screamFeedback));
     }
-
+    
     IEnumerator Shield()
     {
         _enemyHealth.shieldIsOn = true;
         shield.SetActive(true);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         shield.SetActive(false);
         _enemyHealth.shieldIsOn = false;
+    }
+
+    IEnumerator Feedback(GameObject ob)
+    {
+        ob.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        ob.SetActive(false);
     }
 
     #endregion
@@ -296,7 +305,9 @@ public class JasonController : MonoBehaviour
     IEnumerator Stun()
     {
         var o = gameObject;
-        o.transform.position = _player.position;
+        Vector3 destination = _player.position;
+        yield return new WaitForSeconds(0.5f);
+        o.transform.position = destination;
         o.tag = "EnemyStun";
         o.layer = 9;
         yield return new WaitForSeconds(0.5f);
