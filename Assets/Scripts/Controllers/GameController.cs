@@ -35,25 +35,7 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        // if (!_gameStarted) return;
-
-        /*
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _pause = !_pause;
-        }
-
-        if (_pause)
-        {
-            if (!_isPaused) PauseGame();
-        }
-        else
-        {
-            if (_isPaused) ExitPauseGame();
-        }
-
         if (!_canCountTimer || !canPlayTheGame) return;
-        */
 
         if (_timer <= maxTimer)
         {
@@ -70,7 +52,7 @@ public class GameController : MonoBehaviour
 
             _canCountTimer = false;
 
-            // FinishGame();
+            FinishGame();
         }
     }
 
@@ -102,13 +84,12 @@ public class GameController : MonoBehaviour
         _isPaused = false;
     }
 
-    private void FinishGame()
+    public void FinishGame()
     {
         pauseUI.SetActive(true);
 
         canPlayTheGame = false;
-
-        _gameStarted = false;
+        _canCountTimer = false;
     }
 
     public void RestartGame()

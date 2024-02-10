@@ -145,6 +145,7 @@ public class PlayerHealth : MonoBehaviour
 
         _sprite.color = Color.red;
         _isDead = true;
+        GameController.Instance.FinishGame();
     }
 
     IEnumerator DamageFeedback()
