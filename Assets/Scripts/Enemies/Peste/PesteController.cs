@@ -62,9 +62,11 @@ public class PesteController : MonoBehaviour
         _fearFunctionList.Add(Retreat);
         
         _braveFunctionList.Add(CadenceMin);
+        _braveFunctionList.Add(ShootDouble);
         
         _angryFunctionList.Add(CadenceMax);
         _angryFunctionList.Add(Dodge);
+        _angryFunctionList.Add(ShootTriple);
     }
 
     void Update()
@@ -93,12 +95,12 @@ public class PesteController : MonoBehaviour
                     _emotionTimer = 0f;
                     break;
                 case "Brave":
-                    _braveFunctionList[0].Invoke();
+                    _braveFunctionList[Random.Range(0, 2)].Invoke();
                     StartCoroutine(_fuzzy.StopEmotion());
                     _emotionTimer = 0f;
                     break;
                 case "Angry":
-                    _angryFunctionList[Random.Range(0, 2)].Invoke();
+                    _angryFunctionList[Random.Range(0, 3)].Invoke();
                     StartCoroutine(_fuzzy.StopEmotion());
                     _emotionTimer = 0f;
                     break;
@@ -281,6 +283,32 @@ public class PesteController : MonoBehaviour
         yield return new WaitForSeconds(3f);
         attackCooldown = 1f;
     }
+    
+    void ShootDouble()
+    {
+        Vector3 playerPosition = GameObject.FindWithTag("Player").transform.position;
+
+        Vector2 directionToPlayer = (playerPosition - transform.position).normalized;
+
+        float angleToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
+
+        float angleStep = 20 / (2 - 1);
+
+        for (int i = 0; i < 2; i++)
+        {
+            float angle = angleToPlayer - 20 / 2f + i * angleStep;
+
+            Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+            
+            Vector3 bulletPosition = transform.position + (Vector3)direction * 1.0f;
+
+            Transform bullet = Instantiate(projectilePrefab, bulletPosition, Quaternion.identity);
+
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+
+            rb.AddForce(direction * projectileSpeed, ForceMode2D.Impulse);
+        }
+    }
 
     #endregion
 
@@ -305,6 +333,32 @@ public class PesteController : MonoBehaviour
         attackCooldown = 0.25f;
         yield return new WaitForSeconds(3f);
         attackCooldown = 1f;
+    }
+    
+    void ShootTriple()
+    {
+        Vector3 playerPosition = GameObject.FindWithTag("Player").transform.position;
+
+        Vector2 directionToPlayer = (playerPosition - transform.position).normalized;
+
+        float angleToPlayer = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
+
+        float angleStep = 20 / (3 - 1);
+
+        for (int i = 0; i < 3; i++)
+        {
+            float angle = angleToPlayer - 20 / 2f + i * angleStep;
+
+            Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+            
+            Vector3 bulletPosition = transform.position + (Vector3)direction * 1.0f;
+
+            Transform bullet = Instantiate(projectilePrefab, bulletPosition, Quaternion.identity);
+
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+
+            rb.AddForce(direction * projectileSpeed, ForceMode2D.Impulse);
+        }
     }
 
     #endregion

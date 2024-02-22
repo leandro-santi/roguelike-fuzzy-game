@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         _gameTimer = 0f;
-        _spawnInterval = 5f;
+        _spawnInterval = 7.5f;
         _timeSinceLastSpawn = 0f;
     }
 
